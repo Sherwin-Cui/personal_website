@@ -1,0 +1,237 @@
+/* 导航栏 */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--header-height);
+    z-index: 1000;
+    transition: all 0.3s var(--ease-smooth);
+    padding: 0;
+    background: var(--color-pure-white);
+}
+
+.header.scrolled {
+    background: var(--color-pure-white);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.header-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+}
+
+.header-left {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 200px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+}
+
+.header-center {
+    position: absolute;
+    left: 200px;
+    top: 0;
+    width: 300px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.header-center nav {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.header-right {
+    display: none; /* 暂时隐藏右侧按钮 */
+}
+
+.logo {
+    color: var(--color-light-gray);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 400;
+    transition: all 0.3s ease;
+    padding: 0;
+    border-radius: 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+}
+
+/* Apply Chinese font to the logo when it contains Chinese text */
+.logo.show-chinese {
+    font-family: 'Noto Serif SC', serif;
+}
+
+.logo:hover {
+    background: #3398fe;
+    color: var(--color-pure-white);
+    transform: translateY(-2px);
+}
+
+/* 语言切换弹窗 */
+.language-tooltip {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: var(--color-pure-white);
+    color: var(--color-pure-black);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 400;
+    opacity: 0;
+    transform: translateY(-100%);
+    transition: all 0.3s ease;
+    pointer-events: none;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.logo:hover .language-tooltip {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.nav-menu {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    height: var(--header-height);
+    width: 100%;
+}
+
+.nav-menu li {
+    width: 100px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-menu li:nth-child(1) {
+    /* Work: 200-300px */
+}
+
+.nav-menu li:nth-child(2) {
+    /* About: 300-400px */
+}
+
+.nav-menu li:nth-child(3) {
+    /* Services: 400-500px */
+}
+
+.nav-link {
+    color: var(--color-light-gray);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 400;
+    transition: all 0.3s ease;
+    padding: 0;
+    border-radius: 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+.nav-link:hover {
+    background: #3398fe;
+    color: var(--color-pure-white);
+    transform: translateY(-2px);
+}
+
+/* 下拉菜单容器 */
+.dropdown-overlay {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    width: 100vw;
+    height: calc(100vh - var(--header-height));
+    background: #3398fe;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 999;
+    transform: translateY(-100%);
+    transition: transform 0.5s var(--ease-smooth);
+    pointer-events: none;
+    margin-top: 0;
+    border-top: none;
+}
+
+.dropdown-overlay.active {
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.dropdown-content {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 80px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dropdown-placeholder {
+    text-align: center;
+    color: var(--color-light-gray);
+}
+
+.dropdown-placeholder h2 {
+    font-size: 48px;
+    font-weight: 300;
+    margin-bottom: 20px;
+    color: var(--color-pure-white);
+}
+
+.dropdown-placeholder p {
+    font-size: 18px;
+    opacity: 0.7;
+}
+
+.cta-button {
+    color: var(--color-light-gray);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 400;
+    transition: all 0.3s ease;
+    padding: 0 20px;
+    border-radius: 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    background: transparent;
+    border: none;
+}
+
+.cta-button:hover {
+    background: #3398fe;
+    color: var(--color-pure-white);
+    transform: translateY(-2px);
+}
+

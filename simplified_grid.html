@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简化网格系统</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f5f5f5;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            overflow: hidden;
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        /* 固定配置 */
+        :root {
+            --margin-top: 40px;
+            --margin-right: 20px;
+            --margin-bottom: 20px;
+            --margin-left: 20px;
+            --columns: 4;
+            --rows: 3;
+            --gap: 30px;
+        }
+
+        /* 网格容器 - 全屏覆盖 */
+        .grid-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none; /* 不阻挡下层交互 */
+            z-index: 9999;
+        }
+
+        /* 容器区域 */
+        .container {
+            position: absolute;
+            top: var(--margin-top);
+            right: var(--margin-right);
+            bottom: var(--margin-bottom);
+            left: var(--margin-left);
+            pointer-events: none;
+        }
+
+        /* 页边距指示器 */
+        .margins {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+        }
+
+        .margin-line {
+            position: absolute;
+            background: rgba(255, 0, 0, 0.15);
+        }
+
+        .margin-top {
+            top: 0;
+            left: 0;
+            right: 0;
+            height: var(--margin-top);
+            border-bottom: 1px dashed rgba(255, 0, 0, 0.3);
+        }
+
+        .margin-right {
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: var(--margin-right);
+            border-left: 1px dashed rgba(255, 0, 0, 0.3);
+        }
+
+        .margin-bottom {
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: var(--margin-bottom);
+            border-top: 1px dashed rgba(255, 0, 0, 0.3);
+        }
+
+        .margin-left {
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: var(--margin-left);
+            border-right: 1px dashed rgba(255, 0, 0, 0.3);
+        }
+
+        /* 网格 */
+        .grid {
+            position: absolute;
+            top: var(--margin-top);
+            right: var(--margin-right);
+            bottom: var(--margin-bottom);
+            left: var(--margin-left);
+            display: grid;
+            grid-template-columns: repeat(var(--columns), 1fr);
+            grid-template-rows: repeat(var(--rows), 1fr);
+            gap: var(--gap);
+            pointer-events: none;
+        }
+
+        .grid-cell {
+            background: rgba(255, 0, 0, 0.03);
+            border: 1px solid rgba(255, 0, 0, 0.2);
+            position: relative;
+        }
+
+        /* 标尺数字 */
+        .grid-cell::before {
+            content: attr(data-index);
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            font-size: 10px;
+            color: rgba(255, 0, 0, 0.4);
+            font-weight: 500;
+        }
+
+        /* 坐标原点指示器 */
+        .origin-indicator {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 30px;
+            height: 30px;
+            border-left: 2px solid #ff0000;
+            border-top: 2px solid #ff0000;
+            pointer-events: none;
+        }
+
+        .origin-label {
+            position: absolute;
+            top: 5px;
+            left: 35px;
+            font-size: 11px;
+            color: #ff0000;
+            font-weight: bold;
+        }
+
+        /* 控制面板 - 可拖拽 */
+        .info-panel {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            padding: 0;
+            z-index: 10000;
+            min-width: 220px;
+            pointer-events: auto;
+            user-select: none;
+        }
+
+        .info-panel.hidden {
+            display: none;
+        }
+
+        /* 快速恢复按钮 */
+        .restore-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: #ff0000;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            z-index: 10001;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s;
+        }
+
+        .restore-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .restore-btn.show {
+            display: flex;
+        }
+
+        .grid-panel {
+            padding: 0;
+            z-index: 10000;
+            min-width: 220px;
+            pointer-events: auto;
+            user-select: none;
+        }
+
+        /* 拖拽手柄 */
+        .panel-header {
+            padding: 10px 15px;
+            background: #f8f8f8;
+            border-bottom: 1px solid #eee;
+            cursor: move;
+            border-radius: 6px 6px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .panel-header:hover {
+            background: #f0f0f0;
+        }
+
+        .panel-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .panel-close {
+            width: 16px;
+            height: 16px;
+            background: #ff5555;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .panel-close:hover {
+            opacity: 0.8;
+        }
+
+        /* 面板内容 */
+        .panel-content {
+            padding: 15px;
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 12px;
+        }
+
+        .info-label {
+            color: #666;
+        }
+
+        .info-value {
+            font-weight: 600;
+            color: #333;
+            font-family: 'SF Mono', monospace;
+        }
+
+        .info-value.highlight {
+            color: #ff0000;
+        }
+
+        .divider {
+            height: 1px;
+            background: #eee;
+            margin: 10px 0;
+        }
+
+        /* 切换按钮 */
+        .toggle-btn {
+            width: 100%;
+            padding: 6px;
+            background: white;
+            border: 1px solid #ff0000;
+            color: #ff0000;
+            border-radius: 4px;
+            font-size: 11px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.2s;
+        }
+
+        .toggle-btn:hover {
+            background: #ff0000;
+            color: white;
+        }
+
+        .toggle-btn.active {
+            background: #ff0000;
+            color: white;
+        }
+
+        /* 吸附点可视化（调试用，默认隐藏） */
+        .snap-point {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: rgba(0, 0, 255, 0.3);
+            border-radius: 50%;
+            margin-left: -3px;
+            margin-top: -3px;
+            pointer-events: none;
+            display: none;
+        }
+
+        .show-snap-points .snap-point {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- 网格覆盖层 -->
+    <div class="grid-overlay" id="gridOverlay">
+        <!-- 坐标原点指示器 -->
+        <div class="origin-indicator">
+            <span class="origin-label">(0, 0)</span>
+        </div>
+        
+        <!-- 页边距 -->
+        <div class="margins">
+            <div class="margin-line margin-top"></div>
+            <div class="margin-line margin-right"></div>
+            <div class="margin-line margin-bottom"></div>
+            <div class="margin-line margin-left"></div>
+        </div>
+        
+        <!-- 网格 -->
+        <div class="grid" id="grid"></div>
+        
+        <!-- 吸附点容器 -->
+        <div id="snapPoints"></div>
+    </div>
+
+    <!-- 信息面板 -->
+    <div class="info-panel" id="infoPanel">
+        <div class="panel-header" id="panelHeader">
+            <span class="panel-title">网格系统</span>
+            <div class="panel-close" onclick="togglePanel()"></div>
+        </div>
+        <div class="panel-content">
+            <!-- 实时信息 -->
+            <div class="info-item">
+                <span class="info-label">鼠标坐标:</span>
+                <span class="info-value highlight" id="mousePos">0, 0</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">坐标原点:</span>
+                <span class="info-value">左上角 (0, 0)</span>
+            </div>
+            
+            <div class="divider"></div>
+            
+            <!-- 画布信息 -->
+            <div class="info-item">
+                <span class="info-label">窗口尺寸:</span>
+                <span class="info-value" id="windowSize">-</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">全屏尺寸:</span>
+                <span class="info-value" id="fullscreenSize">-</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">设备像素比:</span>
+                <span class="info-value" id="pixelRatio">-</span>
+            </div>
+            
+            <div class="divider"></div>
+            
+            <!-- 网格配置 -->
+            <div class="info-item">
+                <span class="info-label">网格:</span>
+                <span class="info-value">4列 × 3行</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">间距:</span>
+                <span class="info-value">30px</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">边距:</span>
+                <span class="info-value">T40 R20 B20 L20</span>
+            </div>
+            
+            <!-- 切换按钮 -->
+            <button class="toggle-btn active" onclick="toggleGrid()">显示/隐藏网格</button>
+        </div>
+    </div>
+
+    <script>
+        // 网格系统类
+        class SimpleGrid {
+            constructor() {
+                // 固定配置
+                this.config = {
+                    marginTop: 40,
+                    marginRight: 20,
+                    marginBottom: 20,
+                    marginLeft: 20,
+                    columns: 4,
+                    rows: 3,
+                    gap: 30
+                };
+                
+                // DOM元素
+                this.grid = document.getElementById('grid');
+                this.panel = document.getElementById('infoPanel');
+                this.panelHeader = document.getElementById('panelHeader');
+                this.mousePos = document.getElementById('mousePos');
+                this.snapPointsContainer = document.getElementById('snapPoints');
+                
+                // 状态
+                this.isDragging = false;
+                this.dragOffset = { x: 0, y: 0 };
+                this.snapPoints = [];
+                this.snapRadius = 10;
+                
+                this.init();
+            }
+            
+            init() {
+                this.createGrid();
+                this.createSnapPoints();
+                this.updateSizeInfo();
+                this.bindEvents();
+                
+                // 测试全屏尺寸
+                this.checkFullscreenSize();
+            }
+            
+            createGrid() {
+                // 创建网格单元格
+                const totalCells = this.config.columns * this.config.rows;
+                this.grid.innerHTML = '';
+                
+                for (let i = 0; i < totalCells; i++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'grid-cell';
+                    cell.setAttribute('data-index', i + 1);
+                    this.grid.appendChild(cell);
+                }
+            }
+            
+            createSnapPoints() {
+                const { marginTop, marginRight, marginBottom, marginLeft, columns, rows, gap } = this.config;
+                
+                // 判断是否全屏模式
+                const isFullscreen = document.fullscreenElement !== null;
+                const viewportWidth = isFullscreen ? 1470 : window.innerWidth;
+                const viewportHeight = isFullscreen ? 919 : window.innerHeight;
+                
+                // 计算网格尺寸
+                const containerWidth = viewportWidth - marginLeft - marginRight;
+                const containerHeight = viewportHeight - marginTop - marginBottom;
+                
+                const cellWidth = (containerWidth - gap * (columns - 1)) / columns;
+                const cellHeight = (containerHeight - gap * (rows - 1)) / rows;
+                
+                // 清空吸附点
+                this.snapPoints = [];
+                this.snapPointsContainer.innerHTML = '';
+                
+                // 创建吸附点（网格交叉点）
+                for (let row = 0; row <= rows; row++) {
+                    for (let col = 0; col <= columns; col++) {
+                        const x = marginLeft + col * (cellWidth + gap);
+                        const y = marginTop + row * (cellHeight + gap);
+                        
+                        // 调整边缘点
+                        const finalX = col === columns ? viewportWidth - marginRight : x;
+                        const finalY = row === rows ? viewportHeight - marginBottom : y;
+                        
+                        this.snapPoints.push({ x: finalX, y: finalY });
+                        
+                        // 创建可视化点（调试用）
+                        const point = document.createElement('div');
+                        point.className = 'snap-point';
+                        point.style.left = finalX + 'px';
+                        point.style.top = finalY + 'px';
+                        this.snapPointsContainer.appendChild(point);
+                    }
+                }
+            }
+            
+            getSnappedPosition(x, y) {
+                let minDistance = this.snapRadius;
+                let snappedX = x;
+                let snappedY = y;
+                
+                for (const point of this.snapPoints) {
+                    const distance = Math.sqrt(
+                        Math.pow(x - point.x, 2) + 
+                        Math.pow(y - point.y, 2)
+                    );
+                    
+                    if (distance < minDistance) {
+                        minDistance = distance;
+                        snappedX = point.x;
+                        snappedY = point.y;
+                    }
+                }
+                
+                return { x: snappedX, y: snappedY };
+            }
+            
+            updateSizeInfo() {
+                // 窗口尺寸
+                document.getElementById('windowSize').textContent = 
+                    `${window.innerWidth} × ${window.innerHeight}`;
+                
+                // 设备像素比
+                document.getElementById('pixelRatio').textContent = 
+                    window.devicePixelRatio.toFixed(2);
+            }
+            
+            checkFullscreenSize() {
+                // 实际测量的全屏尺寸（去掉刘海）
+                const FULLSCREEN_WIDTH = 1470;
+                const FULLSCREEN_HEIGHT = 919;
+                
+                // 获取屏幕尺寸
+                const screenWidth = screen.width;
+                const screenHeight = screen.height;
+                const availWidth = screen.availWidth;
+                const availHeight = screen.availHeight;
+                
+                // 显示全屏尺寸
+                document.getElementById('fullscreenSize').textContent = 
+                    `${FULLSCREEN_WIDTH} × ${FULLSCREEN_HEIGHT}`;
+                
+                // 如果需要进入全屏测试
+                if (window.location.hash === '#fullscreen') {
+                    document.documentElement.requestFullscreen().then(() => {
+                        setTimeout(() => {
+                            console.log('全屏模式尺寸:', {
+                                实际可用: `${FULLSCREEN_WIDTH} × ${FULLSCREEN_HEIGHT}`,
+                                窗口测量: `${window.innerWidth} × ${window.innerHeight}`,
+                                屏幕物理: `${screenWidth} × ${screenHeight}`,
+                                屏幕可用: `${availWidth} × ${availHeight}`,
+                                刘海占用: `${availHeight - FULLSCREEN_HEIGHT}px`
+                            });
+                        }, 100);
+                    });
+                }
+            }
+            
+            bindEvents() {
+                // 鼠标移动 - 带吸附
+                document.addEventListener('mousemove', (e) => {
+                    // 应用吸附
+                    const snapped = this.getSnappedPosition(e.clientX, e.clientY);
+                    
+                    // 更新坐标显示
+                    this.mousePos.textContent = 
+                        `${Math.round(snapped.x)}, ${Math.round(snapped.y)}`;
+                });
+                
+                // 面板拖拽
+                this.panelHeader.addEventListener('mousedown', (e) => {
+                    this.isDragging = true;
+                    this.dragOffset.x = e.clientX - this.panel.offsetLeft;
+                    this.dragOffset.y = e.clientY - this.panel.offsetTop;
+                    this.panelHeader.style.cursor = 'grabbing';
+                });
+                
+                document.addEventListener('mousemove', (e) => {
+                    if (this.isDragging) {
+                        const x = e.clientX - this.dragOffset.x;
+                        const y = e.clientY - this.dragOffset.y;
+                        
+                        // 限制在视口内
+                        const maxX = window.innerWidth - this.panel.offsetWidth;
+                        const maxY = window.innerHeight - this.panel.offsetHeight;
+                        
+                        this.panel.style.left = Math.max(0, Math.min(x, maxX)) + 'px';
+                        this.panel.style.top = Math.max(0, Math.min(y, maxY)) + 'px';
+                        this.panel.style.right = 'auto';
+                    }
+                });
+                
+                document.addEventListener('mouseup', () => {
+                    if (this.isDragging) {
+                        this.isDragging = false;
+                        this.panelHeader.style.cursor = 'move';
+                    }
+                });
+                
+                // 窗口调整
+                window.addEventListener('resize', () => {
+                    this.createSnapPoints();
+                    this.updateSizeInfo();
+                });
+                
+                // 键盘快捷键
+                document.addEventListener('keydown', (e) => {
+                    // G键切换网格
+                    if (e.key === 'g' || e.key === 'G') {
+                        toggleGrid();
+                    }
+                    // F键测试全屏
+                    if (e.key === 'f' || e.key === 'F') {
+                        if (!document.fullscreenElement) {
+                            document.documentElement.requestFullscreen();
+                        } else {
+                            document.exitFullscreen();
+                        }
+                    }
+                    // I键显示/隐藏信息面板
+                    if (e.key === 'i' || e.key === 'I') {
+                        togglePanel();
+                    }
+                    // ESC键恢复面板（如果被关闭）
+                    if (e.key === 'Escape') {
+                        const panel = document.getElementById('infoPanel');
+                        if (panel.style.display === 'none') {
+                            panel.style.display = 'block';
+                        }
+                    }
+                });
+                
+                // 全屏变化事件
+                document.addEventListener('fullscreenchange', () => {
+                    setTimeout(() => {
+                        this.createSnapPoints();
+                        this.updateSizeInfo();
+                        
+                        if (document.fullscreenElement) {
+                            console.log('进入全屏，实际尺寸:', {
+                                浏览器全屏: '1470 × 919 (去掉刘海)',
+                                窗口测量: `${window.innerWidth} × ${window.innerHeight}`,
+                                差异: `宽度差${Math.abs(1470 - window.innerWidth)}px, 高度差${Math.abs(919 - window.innerHeight)}px`
+                            });
+                        }
+                    }, 100);
+                });
+            }
+        }
+        
+        // 全局函数
+        function toggleGrid() {
+            const overlay = document.getElementById('gridOverlay');
+            overlay.style.display = overlay.style.display === 'none' ? 'block' : 'none';
+            event.target.classList.toggle('active');
+        }
+        
+        function togglePanel() {
+            const panel = document.getElementById('infoPanel');
+            panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+        }
+        
+        // 初始化
+        let gridSystem;
+        document.addEventListener('DOMContentLoaded', () => {
+            gridSystem = new SimpleGrid();
+            
+            // 自动输出尺寸信息
+            console.log('=== 浏览器尺寸信息 ===');
+            console.log('当前窗口:', window.innerWidth, '×', window.innerHeight);
+            console.log('全屏尺寸: 1470 × 919 (实测，去掉刘海)');
+            console.log('屏幕物理:', screen.width, '×', screen.height);
+            console.log('屏幕可用:', screen.availWidth, '×', screen.availHeight);
+            console.log('像素比:', window.devicePixelRatio);
+            console.log('');
+            console.log('=== 快捷键说明 ===');
+            console.log('F - 进入/退出全屏');
+            console.log('G - 显示/隐藏网格');
+            console.log('I - 显示/隐藏信息面板');
+            console.log('ESC - 恢复关闭的面板');
+        });
+    </script>
+</body>
+</html>

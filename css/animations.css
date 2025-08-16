@@ -1,0 +1,237 @@
+/* 线条动画容器 */
+.lines-animation {
+    position: fixed;
+    left: 5%;
+    top: 50%;
+    width: 900px;
+    height: 900px;
+    transform: translateY(-50%);
+    z-index: 2;
+    pointer-events: none;
+    will-change: transform;
+    animation: rotateContainer 30s linear infinite;
+    opacity: 0.75;
+}
+
+@keyframes rotateContainer {
+    0% { transform: translateY(-50%) rotate3d(0, 1, 0, 0deg); }
+    100% { transform: translateY(-50%) rotate3d(0, 1, 0, 360deg); }
+}
+
+.animation-line {
+    position: absolute;
+    background: #0057a5;
+    transform-origin: center;
+    opacity: 0;
+    will-change: opacity, transform;
+    backface-visibility: hidden;
+    animation: fadeInOut 4s ease-in-out infinite;
+}
+
+/* 横向线条组 */
+.horizontal-line {
+    width: 500%;
+    height: 1px;
+    left: -200%;
+}
+
+.h1 {
+    top: 20%;
+    animation: slideHFade 6s ease-in-out infinite, verticalDrift 15s ease-in-out infinite;
+}
+
+.h2 {
+    top: 35%;
+    animation: slideHFade 6s ease-in-out infinite 0.8s, verticalDrift 15s ease-in-out infinite 2s;
+}
+
+/* 纵向线条组 */
+.vertical-line {
+    width: 1px;
+    height: 500%;
+    top: -200%;
+}
+
+.v1 {
+    left: 20%;
+    animation: slideVFade 6s ease-in-out infinite 0.3s;
+}
+
+.v2 {
+    left: 35%;
+    animation: slideVFade 6s ease-in-out infinite 0.8s;
+}
+
+/* 对角线条组 */
+.diagonal-line {
+    width: 1px;
+    height: 282%;
+    top: -20.5%;
+    left: 50%;
+    transform-origin: center;
+}
+
+.d1 {
+    transform: rotate(45deg);
+    animation: rotateLine 8s ease-in-out infinite, fadeInOut 8s ease-in-out infinite;
+}
+
+.d2 {
+    transform: rotate(-45deg);
+    animation: rotateLine 8s ease-in-out infinite 2s, fadeInOut 8s ease-in-out infinite 2s;
+}
+
+
+/* 闪烁效果 */
+.flash {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0;
+    animation: flash 3s ease-in-out infinite;
+}
+
+.flash1 {
+    top: 20%;
+    left: 20%;
+    animation-delay: 0s;
+}
+
+.flash2 {
+    top: 80%;
+    left: 80%;
+    animation-delay: 1s;
+}
+
+.flash3 {
+    top: 35%;
+    left: 65%;
+    animation-delay: 2s;
+}
+
+.flash4 {
+    top: 65%;
+    left: 35%;
+    animation-delay: 1.5s;
+}
+
+.flash5 {
+    top: 50%;
+    left: 50%;
+    animation-delay: 0.5s;
+}
+
+/* 动画关键帧 */
+@keyframes fadeInOut {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 1; }
+}
+
+@keyframes slideH {
+    0%, 100% { 
+        transform: scaleX(0.5);
+        opacity: 0.3;
+    }
+    50% { 
+        transform: scaleX(1);
+        opacity: 1;
+    }
+}
+
+@keyframes slideHFade {
+    0%, 100% { 
+        transform: scaleX(0.5);
+        opacity: 0;
+    }
+    10%, 90% {
+        opacity: 0.3;
+    }
+    50% { 
+        transform: scaleX(1);
+        opacity: 1;
+    }
+}
+
+@keyframes verticalDrift {
+    0%, 100% { 
+        transform: translateY(0);
+    }
+    25% { 
+        transform: translateY(-30px);
+    }
+    50% { 
+        transform: translateY(0);
+    }
+    75% { 
+        transform: translateY(30px);
+    }
+}
+
+@keyframes slideV {
+    0%, 100% { 
+        transform: scaleY(0.5);
+        opacity: 0.3;
+    }
+    50% { 
+        transform: scaleY(1);
+        opacity: 1;
+    }
+}
+
+@keyframes slideVFade {
+    0%, 100% { 
+        transform: scaleY(0.5);
+        opacity: 0;
+    }
+    10%, 90% {
+        opacity: 0.3;
+    }
+    50% { 
+        transform: scaleY(1);
+        opacity: 1;
+    }
+}
+
+@keyframes rotateLine {
+    0%, 100% { 
+        transform: rotate(45deg);
+        opacity: 0.5;
+    }
+    25% { 
+        transform: rotate(90deg);
+        opacity: 1;
+    }
+    50% { 
+        transform: rotate(135deg);
+        opacity: 1;
+    }
+    75% { 
+        transform: rotate(180deg);
+        opacity: 1;
+    }
+}
+
+
+@keyframes flash {
+    0%, 100% { 
+        opacity: 0;
+        transform: scale(0);
+    }
+    50% { 
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+@keyframes shimmer {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+@keyframes blink {
+    0%, 50% { border-color: var(--color-pure-white); }
+    51%, 100% { border-color: transparent; }
+}

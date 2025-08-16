@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Sherwin</title>
+    
+    <!-- CSS 模块 -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/navigation.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/hero.css">
+    <link rel="stylesheet" href="css/content.css">
+    <link rel="stylesheet" href="css/video.css">
+    <link rel="stylesheet" href="css/pixel-art.css">
+    <link rel="stylesheet" href="css/simple-page-snap.css">
+    <link rel="stylesheet" href="css/grid-system.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="header" id="header">
+        <div class="header-container">
+            <div class="header-left">
+                <a href="#" class="logo" id="languageToggle" data-en="中文" data-zh="English">中文
+                    <div class="language-tooltip" data-en="切换到中文" data-zh="Switch to English">切换到中文</div>
+                </a>
+            </div>
+            
+            <div class="header-center">
+                <nav>
+                    <ul class="nav-menu">
+                        <li><a href="#" class="nav-link dropdown-trigger" data-dropdown="work" data-en="Work" data-zh="作品">Work</a></li>
+                        <li><a href="#" class="nav-link dropdown-trigger" data-dropdown="about" data-en="About" data-zh="关于">About</a></li>
+                        <li><a href="#" class="nav-link dropdown-trigger" data-dropdown="services" data-en="Services" data-zh="服务">Services</a></li>
+                    </ul>
+                </nav>
+            </div>
+            
+            <div class="header-right">
+                <a href="#" class="cta-button" data-en="Contact" data-zh="联系">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 下拉菜单覆盖层 -->
+    <div class="dropdown-overlay" id="dropdownOverlay">
+        <div class="dropdown-content">
+            <div class="dropdown-placeholder">
+                <h2 id="dropdownTitle">Coming Soon</h2>
+                <p id="dropdownDescription">This section is under development.</p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 线条动画 -->
+    <div class="lines-animation">
+        <!-- 横向线条 -->
+        <div class="animation-line horizontal-line h1"></div>
+        <div class="animation-line horizontal-line h2"></div>
+        
+        <!-- 纵向线条 -->
+        <div class="animation-line vertical-line v1"></div>
+        <div class="animation-line vertical-line v2"></div>
+    </div>
+
+    <!-- Hero区域 -->
+    <section class="hero">
+        <div class="hero-text-container">
+            <div class="hero-line">
+                <div class="text-wrapper">
+                    <div class="text-stroke" data-en="hey," data-zh="你好，">hey,</div>
+                    <div class="text-fill" id="fill1" data-en="hey," data-zh="你好，">hey,</div>
+                </div>
+            </div>
+            <div class="hero-line">
+                <div class="text-wrapper">
+                    <div class="text-stroke" data-en="It's Sherwin" data-zh="我是崔植树">It's Sherwin</div>
+                    <div class="text-fill" id="fill2" data-en="It's Sherwin" data-zh="我是崔植树">It's Sherwin</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 滚动指示器 -->
+        <div class="scroll-indicator">
+            <span class="typewriter-text"></span>
+        </div>
+        
+    </section>
+
+    <!-- 视频区域 -->
+    <div class="video-container">
+        <video class="background-video" id="video1" muted loop preload="auto">
+            <source src="Video2/1.mp4" type="video/mp4">
+        </video>
+        <video class="background-video" id="video2" muted loop preload="auto">
+            <source src="Video2/2.mp4" type="video/mp4">
+        </video>
+        <video class="background-video" id="video3" muted loop preload="auto">
+            <source src="Video2/3.mp4" type="video/mp4">
+        </video>
+        <video class="background-video" id="video4" muted loop preload="auto">
+            <source src="Video2/4.mp4" type="video/mp4">
+        </video>
+        <video class="background-video" id="video5" muted loop preload="auto">
+            <source src="Video2/5.mp4" type="video/mp4">
+        </video>
+        <video class="background-video" id="video6" muted loop preload="auto">
+            <source src="Video2/6.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <!-- 主内容区域 -->
+    <main class="main-content" id="mainContent">
+        <!-- 内容顶部手柄 -->
+        <div class="content-handle"></div>
+        
+        <div class="content-inner">
+            <!-- 页面 01: Green Apple's Thousand and One Nights -->
+            <section class="content-section">
+                <div class="section-container">
+                    <!-- 页面编号 -->
+                    <span class="section-number">01</span>
+                    
+                    <!-- 主要内容网格 -->
+                    <div class="feature-grid">
+                        <!-- 左侧文本区域 -->
+                        <div class="feature-text">
+                            <h2 class="feature-title" 
+                                data-en="Green Apple's Thousand and One Nights" 
+                                data-zh="苹果的一千零一夜">
+                                Green Apple's Thousand and One Nights
+                            </h2>
+                            <div class="feature-description" 
+                                 data-en="Italian designer Pietro Fornasseti's classic series, &quot;Theme and Variations,&quot; is a thousand plates with similar themes yet vastly different designs. You may not have heard of the work, but yes, I stole his idea. I plan to continue creating works based on Apple themes until I complete a collection of 1,000 stamps." 
+                                 data-zh="意大利设计师Pietro Fornasseti经典的系列作品《主旋律与变奏曲》，是一千个异曲同工但又大相径庭的盘子。尽管你很可能没有听说过该作品，但是，是的，我剽窃了他的创意。我打算以苹果为主题创作，直到完成1000幅的集邮。">
+                                Italian designer Pietro Fornasseti's classic series, &quot;Theme and Variations,&quot; is a thousand plates with similar themes yet vastly different designs. You may not have heard of the work, but yes, I stole his idea. I plan to continue creating works based on Apple themes until I complete a collection of 1,000 stamps.
+                            </div>
+                        </div>
+                        
+                        <!-- 右侧视觉区域 -->
+                        <div class="feature-visual">
+                            <div class="visual-placeholder">
+                                <span data-en="Coming Soon" data-zh="即将上线">Coming Soon</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 页面 02: AI Coding -->
+            <section class="content-section">
+                <div class="section-container">
+                    <!-- 页面编号 -->
+                    <span class="section-number">02</span>
+                    
+                    <!-- 主要内容网格 -->
+                    <div class="feature-grid">
+                        <!-- 左侧文本区域 -->
+                        <div class="feature-text">
+                            <h2 class="feature-title" 
+                                data-en="AI Coding" 
+                                data-zh="AI Coding">
+                                AI Coding
+                            </h2>
+                            <div class="feature-description" 
+                                 data-en="For me, the greatest significance of AI as a productivity tool is that it allows tech-savvy individuals to materialize their ideas with minimal learning curve. In just two or three years, you can create at a pace and pace you enjoy. It&apos;s truly remarkable what a new era we&apos;re living in." 
+                                 data-zh="对于我来说，AI作为生产力的最大意义，就是可以让技术懒汉们以最低的学习成本实体化自己的想法。短短的两三年，就可以用享受的节奏和方式进行创作，不得不让人感叹我们在经历一个时代。">
+                                For me, the greatest significance of AI as a productivity tool is that it allows tech-savvy individuals to materialize their ideas with minimal learning curve. In just two or three years, you can create at a pace and pace you enjoy. It&apos;s truly remarkable what a new era we&apos;re living in.
+                            </div>
+                        </div>
+                        
+                        <!-- 右侧视觉区域 -->
+                        <div class="feature-visual">
+                            <div class="visual-placeholder">
+                                <span data-en="Coming Soon" data-zh="即将上线">Coming Soon</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 页面 03: Graphic Design Works -->
+            <section class="content-section">
+                <div class="section-container">
+                    <!-- 页面编号 -->
+                    <span class="section-number">03</span>
+                    
+                    <!-- 主要内容网格 -->
+                    <div class="feature-grid">
+                        <!-- 左侧文本区域 -->
+                        <div class="feature-text">
+                            <h2 class="feature-title" 
+                                data-en="Graphic design works" 
+                                data-zh="平面设计">
+                                Graphic design works
+                            </h2>
+                            <div class="feature-description" 
+                                 data-en="Welcome to some graphic design work. Sherwin no longer works as a graphic designer, so graphic design has become interesting, just as it was when I first decided to pursue this field. The world needs graphic design to become relevant again!" 
+                                 data-zh="欢迎收看一些平面设计的作品。Sherwin已经不怎么作为一个平面设计师工作了，所以平面设计变得有趣了起来，正如我当初决定接触到这个领域一样。世界需要让平面设计再次变得重要！">
+                                Welcome to some graphic design work. Sherwin no longer works as a graphic designer, so graphic design has become interesting, just as it was when I first decided to pursue this field. The world needs graphic design to become relevant again!
+                            </div>
+                        </div>
+                        
+                        <!-- 右侧视觉区域 - 包含像素艺术 -->
+                        <div class="feature-visual">
+                            <div class="pixel-art-container">
+                                <div class="canvas-wrapper">
+                                    <div id="pixelGrid"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 页面 04: Photography -->
+            <section class="content-section">
+                <div class="section-container">
+                    <!-- 页面编号 -->
+                    <span class="section-number">04</span>
+                    
+                    <!-- 主要内容网格 -->
+                    <div class="feature-grid">
+                        <!-- 左侧文本区域 -->
+                        <div class="feature-text">
+                            <h2 class="feature-title" 
+                                data-en="Photography" 
+                                data-zh="摄影">
+                                Photography
+                            </h2>
+                            <div class="feature-description" 
+                                 data-en="Now that AI can indistinguish the real from the fake, has the significance of photography been diminished? AIGC, while accompanied by randomness, cannot replace the changes and specific states recorded by the camera shutter. The objective reality behind the lens is something AI cannot simulate." 
+                                 data-zh="既然AI已经可以以假乱真，摄影的意义是否遭到了削减？AIGC伴随着随机性，却不能代替相机快门记录下的变化和特定状态。镜头下是AI无法模拟的客观。">
+                                Now that AI can indistinguish the real from the fake, has the significance of photography been diminished? AIGC, while accompanied by randomness, cannot replace the changes and specific states recorded by the camera shutter. The objective reality behind the lens is something AI cannot simulate.
+                            </div>
+                        </div>
+                        
+                        <!-- 右侧视觉区域 -->
+                        <div class="feature-visual">
+                            <div class="visual-placeholder">
+                                <span data-en="Coming Soon" data-zh="即将上线">Coming Soon</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+
+    <!-- 配置文件 -->
+    <script src="js/config.js"></script>
+    
+    <!-- 核心功能模块 -->
+    <script src="js/language.js"></script>
+    <script src="js/dropdown.js"></script>
+    <script src="js/scroll.js"></script>
+    <script src="js/simple-page-snap.js"></script>
+    <script src="js/typewriter.js"></script>
+    <script src="js/video.js"></script>
+    <script src="js/pixel-art.js"></script>
+    
+    <!-- 组件模块 -->
+    <script src="src/components/Header.js"></script>
+    <script src="src/components/VideoBackground.js"></script>
+    <script src="src/components/ScrollIndicator.js"></script>
+    <script src="src/components/GridSystem.js"></script>
+    <script src="src/components/GridKeyboardController.js"></script>
+    
+    <!-- 页面模块 -->
+    <script src="src/pages/HomePage.js"></script>
+    <script src="src/pages/ApplePage.js"></script>
+    <script src="src/pages/AICodingPage.js"></script>
+    <script src="src/pages/DesignPage.js"></script>
+    <script src="src/pages/PhotographyPage.js"></script>
+    <script src="src/pages/PageManager.js"></script>
+    
+    <!-- 路由器 -->
+    <script src="src/router.js"></script>
+    
+    <!-- 主应用 -->
+    <script src="src/app.js"></script>
+    
+    <!-- 原有主逻辑 (保持兼容) -->
+    <script src="js/main.js"></script>
+</body>
+</html>

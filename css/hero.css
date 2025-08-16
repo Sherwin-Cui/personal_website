@@ -1,0 +1,97 @@
+/* Hero 区域 */
+.hero {
+    position: fixed;
+    width: 50vw;
+    left: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-pure-white);
+    z-index: 1;
+}
+
+.hero-text-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: auto;
+    /* 计算左右边距一致：左边距 = (50vw - 文字宽度) / 2，右边距也相同 */
+    padding-left: 8vw;
+    padding-right: 8vw;
+}
+
+.hero-text-container .hero-line:nth-child(1) {
+    order: 1;
+}
+
+.hero-text-container .hero-line:nth-child(2) {
+    order: 2;
+}
+
+.hero-text-container .hero-line:nth-child(n+3) {
+    display: none;
+}
+
+.hero-line {
+    font-size: clamp(60px, 8vw, 150px);
+    font-weight: 300;
+    line-height: 0.85;
+    letter-spacing: -0.03em;
+    margin-bottom: 20px;
+    position: relative;
+    white-space: nowrap;
+    overflow: visible;
+    transform-origin: left bottom;
+}
+
+/* 文字样式 - 使用mask替代clip-path */
+.text-wrapper {
+    position: relative;
+    display: inline-block;
+    overflow: visible;
+}
+
+.text-stroke {
+    color: var(--color-medium-gray);
+    font-weight: 300;
+}
+
+.text-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: var(--color-pure-black);
+    font-weight: 300;
+    width: 100%;
+    height: 1.1em;
+    line-height: inherit;
+    -webkit-mask-image: linear-gradient(90deg, black 0%, black 0%, transparent 0%, transparent 100%);
+    mask-image: linear-gradient(90deg, black 0%, black 0%, transparent 0%, transparent 100%);
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    transition: none;
+}
+
+/* 滚动指示器 - 打字机动画 */
+.scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    left: 8vw;
+    color: var(--color-light-gray);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-family: 'Courier Prime', monospace;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.typewriter-text {
+    display: inline-block;
+    border-right: 2px solid var(--color-pure-white);
+    animation: blink 1s infinite;
+}

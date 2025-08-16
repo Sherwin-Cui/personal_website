@@ -1,0 +1,284 @@
+/* 网格系统样式 */
+
+/* 固定配置 */
+:root {
+    --grid-margin-top: 40px;
+    --grid-margin-right: 20px;
+    --grid-margin-bottom: 20px;
+    --grid-margin-left: 20px;
+    --grid-columns: 4;
+    --grid-rows: 3;
+    --grid-gap: 30px;
+}
+
+/* 网格容器 - 全屏覆盖 */
+.grid-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none; /* 不阻挡下层交互 */
+    z-index: 9999;
+    display: none; /* 默认隐藏 */
+}
+
+.grid-overlay.visible {
+    display: block;
+}
+
+/* 容器区域 */
+.grid-container {
+    position: absolute;
+    top: var(--grid-margin-top);
+    right: var(--grid-margin-right);
+    bottom: var(--grid-margin-bottom);
+    left: var(--grid-margin-left);
+    pointer-events: none;
+}
+
+/* 页边距指示器 */
+.grid-margins {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+}
+
+.grid-margin-line {
+    position: absolute;
+    background: rgba(255, 0, 0, 0.15);
+}
+
+.grid-margin-top {
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--grid-margin-top);
+    border-bottom: 1px dashed rgba(255, 0, 0, 0.3);
+}
+
+.grid-margin-right {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: var(--grid-margin-right);
+    border-left: 1px dashed rgba(255, 0, 0, 0.3);
+}
+
+.grid-margin-bottom {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: var(--grid-margin-bottom);
+    border-top: 1px dashed rgba(255, 0, 0, 0.3);
+}
+
+.grid-margin-left {
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: var(--grid-margin-left);
+    border-right: 1px dashed rgba(255, 0, 0, 0.3);
+}
+
+/* 网格 */
+.grid-layout {
+    position: absolute;
+    top: var(--grid-margin-top);
+    right: var(--grid-margin-right);
+    bottom: var(--grid-margin-bottom);
+    left: var(--grid-margin-left);
+    display: grid;
+    grid-template-columns: repeat(var(--grid-columns), 1fr);
+    grid-template-rows: repeat(var(--grid-rows), 1fr);
+    gap: var(--grid-gap);
+    pointer-events: none;
+}
+
+.grid-cell {
+    background: rgba(255, 0, 0, 0.03);
+    border: 1px solid rgba(255, 0, 0, 0.2);
+    position: relative;
+}
+
+/* 标尺数字 */
+.grid-cell::before {
+    content: attr(data-index);
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    font-size: 10px;
+    color: rgba(255, 0, 0, 0.4);
+    font-weight: 500;
+}
+
+/* 坐标原点指示器 */
+.grid-origin-indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 30px;
+    height: 30px;
+    border-left: 2px solid #ff0000;
+    border-top: 2px solid #ff0000;
+    pointer-events: none;
+}
+
+.grid-origin-label {
+    position: absolute;
+    top: 5px;
+    left: 35px;
+    font-size: 11px;
+    color: #ff0000;
+    font-weight: bold;
+}
+
+/* 网格信息面板 */
+.grid-info-panel {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: white;
+    border: 1px solid rgba(255, 0, 0, 0.3);
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 0;
+    z-index: 10000;
+    min-width: 220px;
+    pointer-events: auto;
+    user-select: none;
+    display: none; /* 默认隐藏 */
+}
+
+.grid-info-panel.visible {
+    display: block;
+}
+
+/* 拖拽手柄 */
+.grid-panel-header {
+    padding: 10px 15px;
+    background: #f8f8f8;
+    border-bottom: 1px solid #eee;
+    cursor: move;
+    border-radius: 6px 6px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.grid-panel-header:hover {
+    background: #f0f0f0;
+}
+
+.grid-panel-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: #333;
+}
+
+.grid-panel-close {
+    width: 16px;
+    height: 16px;
+    background: #ff5555;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.grid-panel-close:hover {
+    opacity: 0.8;
+}
+
+/* 面板内容 */
+.grid-panel-content {
+    padding: 15px;
+}
+
+.grid-info-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 12px;
+}
+
+.grid-info-label {
+    color: #666;
+}
+
+.grid-info-value {
+    font-weight: 600;
+    color: #333;
+    font-family: 'SF Mono', monospace;
+}
+
+.grid-info-value.highlight {
+    color: #ff0000;
+}
+
+.grid-divider {
+    height: 1px;
+    background: #eee;
+    margin: 10px 0;
+}
+
+/* 切换按钮 */
+.grid-toggle-btn {
+    width: 100%;
+    padding: 6px;
+    background: white;
+    border: 1px solid #ff0000;
+    color: #ff0000;
+    border-radius: 4px;
+    font-size: 11px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: all 0.2s;
+}
+
+.grid-toggle-btn:hover {
+    background: #ff0000;
+    color: white;
+}
+
+.grid-toggle-btn.active {
+    background: #ff0000;
+    color: white;
+}
+
+/* 吸附点可视化（调试用，默认隐藏） */
+.grid-snap-point {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: rgba(0, 0, 255, 0.3);
+    border-radius: 50%;
+    margin-left: -3px;
+    margin-top: -3px;
+    pointer-events: none;
+    display: none;
+}
+
+.grid-overlay.show-snap-points .grid-snap-point {
+    display: block;
+}
+
+/* 鼠标坐标追踪指示器 */
+.grid-mouse-indicator {
+    position: fixed;
+    background: rgba(255, 0, 0, 0.8);
+    color: white;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 10px;
+    font-family: 'SF Mono', monospace;
+    pointer-events: none;
+    z-index: 10001;
+    display: none;
+}
+
+.grid-mouse-indicator.visible {
+    display: block;
+}

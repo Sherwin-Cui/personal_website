@@ -1,0 +1,25 @@
+/* 视频容器 */
+.video-container {
+    position: fixed;
+    top: 40px;
+    right: 0;
+    width: min(50vw, calc((100vh - 40px) * 2 / 3)); /* 宽度受高度限制 */
+    height: calc(100vh - 40px);
+    z-index: 3;
+    overflow: hidden;
+}
+
+.background-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.background-video.active {
+    opacity: 1;
+}

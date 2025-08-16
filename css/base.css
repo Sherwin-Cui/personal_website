@@ -1,0 +1,62 @@
+/* 基础重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Courier Prime', monospace;
+    background: var(--color-pure-white);
+    color: var(--color-pure-white);
+    position: relative;
+}
+
+body.chinese {
+    font-family: 'Noto Serif SC', serif;
+}
+
+body.chinese,
+body.chinese .logo,
+body.chinese .nav-link,
+body.chinese .cta-button,
+body.chinese .scroll-indicator,
+body.chinese .feature-label,
+body.chinese .feature-title,
+body.chinese .feature-description {
+    font-family: 'Noto Serif SC', serif;
+}
+
+/* hero文字使用Noto Serif SC字体 */
+.hero-line {
+    font-family: 'Noto Serif SC', serif;
+}
+
+/* 英文模式下功能区块文字使用Courier Prime字体 */
+.feature-label,
+.feature-description {
+    font-family: 'Courier Prime', monospace;
+}
+
+/* h2标题使用Noto Serif SC字体 */
+.feature-title {
+    font-family: 'Noto Serif SC', serif;
+}
+
+/* 滚动容器 */
+.scroll-wrapper {
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.scroll-wrapper.locked {
+    overflow: hidden;
+}
