@@ -8,7 +8,7 @@ window.AppConfig = {
     
     // 动画配置
     animations: {
-        scrollMultiplier: 0.3,
+        scrollMultiplier: 2,
         line1ScrollThreshold: 300,
         line2ScrollThreshold: 600,
         revealThreshold: 800,

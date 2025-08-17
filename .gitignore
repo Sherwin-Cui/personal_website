@@ -38,5 +38,41 @@ build/
 .env.test.local
 .env.production.local
 
+# 图片和视频素材
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.bmp
+*.svg
+*.ico
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.webm
+
+# 音频文件
+*.mp3
+*.wav
+*.flac
+*.aac
+
+# 字体文件（如果太大）
+# *.ttf
+# *.otf
+# *.woff
+# *.woff2
+
+# 大型资源目录
+Video2/
+assets/apple/
+assets/design/
+images/
+
 # 其他
 .claude/
+simplified_grid.html
+pixel-art-optimized.html
+grid系统集成调用
+如何通过网格实现精准布局.md

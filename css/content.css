@@ -40,9 +40,9 @@
 }
 
 .content-section {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: all 0.8s var(--ease-smooth);
+    opacity: 1; /* 立即显示，无渐显效果 */
+    transform: none; /* 无位移动画 */
+    /* 移除transition，元素完全静止 */
     height: 100vh;
     position: relative;
     display: flex;
@@ -114,10 +114,7 @@
     background: var(--color-pure-white);
 }
 
-.content-section.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
+/* 移除.visible动画效果，元素保持静止状态 */
 
 .section-container {
     max-width: 1400px;
@@ -189,12 +186,18 @@
     border: 2px solid transparent; /* 默认透明边框 */
 }
 
-/* H键控制：显示所有文本框边框 */
+/* H键控制：显示所有文本框和视觉容器边框 */
 body.show-text-boxes .feature-title,
 body.show-text-boxes .feature-description {
     border: 2px solid rgba(255, 0, 0, 0.5) !important;
     background: rgba(255, 0, 0, 0.1) !important;
 }
+
+body.show-text-boxes .feature-visual {
+    border: 2px solid rgba(0, 255, 0, 0.5) !important;
+    background: rgba(0, 255, 0, 0.05) !important;
+}
+
 
 .content-section:nth-child(1) .feature-visual {
     position: absolute;

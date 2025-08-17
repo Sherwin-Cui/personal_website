@@ -33,8 +33,9 @@ class GridKeyboardController {
         this.helpVisible = false;
     }
     
+    
     toggleTextBoxes() {
-        // 切换所有文本框边框的显示
+        // 切换所有文本框和视觉容器边框的显示
         const isVisible = document.body.classList.toggle('show-text-boxes');
         this.showNotification(isVisible ? '文本框边框显示' : '文本框边框隐藏');
     }
@@ -120,6 +121,7 @@ class GridKeyboardController {
                 this.showNotification('吸附点切换');
                 break;
                 
+                
             case 'toggleTextBoxes':
                 this.toggleTextBoxes();
                 break;
@@ -204,8 +206,13 @@ class GridKeyboardController {
                 </div>
                 
                 <div style="margin-bottom: 12px;">
+                    <strong style="color: #ff0000;">文本框：</strong><br>
+                    <code>H</code> - 显示/隐藏所有文本框和视觉容器边框
+                </div>
+                
+                <div style="margin-bottom: 12px;">
                     <strong style="color: #ff0000;">帮助：</strong><br>
-                    <code>H</code> 或 <code>?</code> - 显示/隐藏这个帮助面板
+                    <code>?</code> - 显示/隐藏这个帮助面板
                 </div>
                 
                 <div style="background: #f8f8f8; padding: 10px; border-radius: 4px; margin-top: 15px;">
