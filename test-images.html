@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>图片测试页面</title>
+    <style>
+        body { font-family: monospace; padding: 20px; }
+        .test-item { margin: 10px 0; padding: 10px; border: 1px solid #ccc; }
+        .test-item img { max-width: 200px; max-height: 150px; }
+        .error { color: red; }
+        .success { color: green; }
+    </style>
+</head>
+<body>
+    <h1>图片加载测试</h1>
+    
+    <div class="test-item">
+        <h3>苹果图片测试</h3>
+        <img src="assets/apple/001.png" alt="Apple 001" onload="this.nextSibling.innerHTML='✅ 加载成功'; this.nextSibling.className='success'" onerror="this.nextSibling.innerHTML='❌ 加载失败'; this.nextSibling.className='error'">
+        <span>加载中...</span>
+    </div>
+    
+    <div class="test-item">
+        <h3>设计图片测试</h3>
+        <img src="assets/design/project01_okey/okey01.png" alt="Design 001" onload="this.nextSibling.innerHTML='✅ 加载成功'; this.nextSibling.className='success'" onerror="this.nextSibling.innerHTML='❌ 加载失败'; this.nextSibling.className='error'">
+        <span>加载中...</span>
+    </div>
+    
+    <div class="test-item">
+        <h3>视频测试</h3>
+        <video width="200" controls onloadeddata="this.nextSibling.innerHTML='✅ 加载成功'; this.nextSibling.className='success'" onerror="this.nextSibling.innerHTML='❌ 加载失败'; this.nextSibling.className='error'">
+            <source src="Video2/1.mp4" type="video/mp4">
+        </video>
+        <span>加载中...</span>
+    </div>
+    
+    <div class="test-item">
+        <h3>字体测试</h3>
+        <div style="font-family: 'Courier Prime', monospace;">Courier Prime 字体测试</div>
+        <div style="font-family: 'Noto Serif SC', serif;">Noto Serif SC 字体测试 - 中文</div>
+    </div>
+    
+    <script>
+        console.log('测试页面加载完成');
+        
+        // 检查字体加载
+        document.fonts.ready.then(function() {
+            console.log('所有字体已加载');
+        });
+    </script>
+</body>
+</html>
