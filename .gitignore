@@ -38,37 +38,23 @@ build/
 .env.test.local
 .env.production.local
 
-# 图片和视频素材
-*.jpg
-*.jpeg
-*.png
-*.gif
-*.bmp
-*.svg
-*.ico
-*.mp4
-*.mov
-*.avi
-*.mkv
-*.webm
-
-# 音频文件
+# 音频文件（保留图片和视频，部署需要）
 *.mp3
 *.wav
 *.flac
 *.aac
 
-# 字体文件（如果太大）
+# 字体文件（保留，网站需要）
 # *.ttf
-# *.otf
+# *.otf  
 # *.woff
 # *.woff2
 
-# 大型资源目录
-Video2/
-assets/apple/
-assets/design/
-images/
+# 注释掉大型资源目录，部署时需要这些素材
+# Video2/
+# assets/apple/
+# assets/design/ 
+# images/
 
 # Vercel部署
 .vercel
