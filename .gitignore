@@ -70,6 +70,9 @@ assets/apple/
 assets/design/
 images/
 
+# Vercel部署
+.vercel
+
 # 其他
 .claude/
 simplified_grid.html

@@ -9,18 +9,41 @@
     z-index: 2;
     pointer-events: none;
     will-change: transform;
-    animation: rotateContainer 30s linear infinite;
     opacity: 0.75;
 }
 
-@keyframes rotateContainer {
-    0% { transform: translateY(-50%) rotate3d(0, 1, 0, 0deg); }
-    100% { transform: translateY(-50%) rotate3d(0, 1, 0, 360deg); }
+/* 页面线条动画容器 - 无旋转 */
+.page-lines-animation {
+    position: absolute;
+    left: 5%;
+    top: 50%;
+    width: 900px;
+    height: 900px;
+    transform: translateY(-50%);
+    z-index: 1; /* 在背景之上，在所有容器之下 */
+    pointer-events: none;
+    will-change: transform;
+    opacity: 0.3; /* 更低的透明度以免遮挡内容 */
 }
+
+/* 苹果页面横线动画容器 - 固定在500px位置 */
+.apple-lines-animation {
+    position: absolute;
+    left: 5%;
+    top: 500px; /* 固定纵坐标位置 */
+    width: 900px;
+    height: 900px;
+    transform: translateY(-50%);
+    z-index: 1; /* 在背景之上，在所有容器之下 */
+    pointer-events: none;
+    will-change: transform;
+    opacity: 0.3; /* 更低的透明度以免遮挡内容 */
+}
+
 
 .animation-line {
     position: absolute;
-    background: #0057a5;
+    background: var(--color-primary-blue);
     transform-origin: center;
     opacity: 0;
     will-change: opacity, transform;
@@ -37,12 +60,12 @@
 
 .h1 {
     top: 20%;
-    animation: slideHFade 6s ease-in-out infinite, verticalDrift 15s ease-in-out infinite;
+    animation: slideHFade 6s ease-in-out infinite;
 }
 
 .h2 {
     top: 35%;
-    animation: slideHFade 6s ease-in-out infinite 0.8s, verticalDrift 15s ease-in-out infinite 2s;
+    animation: slideHFade 6s ease-in-out infinite 0.8s;
 }
 
 /* 纵向线条组 */
@@ -52,14 +75,20 @@
     top: -200%;
 }
 
+/* 平面设计页面纵向线条无限延长 */
+.page[data-page="3"] .page-lines-animation .vertical-line {
+    height: 2000%; /* 无限延长效果 */
+    top: -900%; /* 调整顶部位置保持居中 */
+}
+
 .v1 {
     left: 20%;
-    animation: slideVFade 6s ease-in-out infinite 0.3s;
+    animation: slideVFade 6s ease-in-out infinite 0.3s, horizontalDrift 8s ease-in-out infinite;
 }
 
 .v2 {
     left: 35%;
-    animation: slideVFade 6s ease-in-out infinite 0.8s;
+    animation: slideVFade 6s ease-in-out infinite 0.8s, horizontalDrift 8s ease-in-out infinite 2s;
 }
 
 /* 对角线条组 */
@@ -226,6 +255,22 @@
 }
 
 
+/* 水平漂移动画 - 苹果页面竖线用 */
+@keyframes horizontalDrift {
+    0%, 100% { 
+        transform: translateX(0);
+    }
+    25% { 
+        transform: translateX(-15px);
+    }
+    50% { 
+        transform: translateX(0);
+    }
+    75% { 
+        transform: translateX(15px);
+    }
+}
+
 @keyframes shimmer {
     0% { left: -100%; }
     100% { left: 100%; }
@@ -234,4 +279,25 @@
 @keyframes blink {
     0%, 50% { border-color: var(--color-pure-white); }
     51%, 100% { border-color: transparent; }
+}
+
+/* 像素闪烁动画 */
+.pixel-flickering {
+    transition: background-color 0.05s ease !important;
+}
+
+/* 像素闪烁的关键帧动画 - 备用方案 */
+@keyframes pixelFlicker {
+    0% { 
+        background-color: inherit;
+        box-shadow: none;
+    }
+    50% { 
+        background-color: #ffffff;
+        box-shadow: 0 0 3px rgba(255, 255, 0, 0.8);
+    }
+    100% { 
+        background-color: inherit;
+        box-shadow: none;
+    }
 }

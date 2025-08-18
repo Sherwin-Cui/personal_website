@@ -157,7 +157,7 @@
 }
 
 .nav-link:hover {
-    background: #3398fe;
+    background: var(--color-primary-blue);
     color: var(--color-pure-white);
     transform: translateY(-2px);
 }
@@ -169,7 +169,7 @@
     left: 0;
     width: 100vw;
     height: calc(100vh - var(--header-height));
-    background: #3398fe;
+    background: var(--color-primary-blue);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     z-index: 999;

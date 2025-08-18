@@ -4,23 +4,25 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a static personal portfolio website with interactive animations and multi-language support. No build process or server required - simply open `index.html` in a browser.
+This is a static personal portfolio website with interactive animations, multi-language support, and precise grid-based layout system. No build process or server required - simply open `index.html` in a browser.
 
-## 一些开发规则
+## 核心开发规范
 
 ### 规则0：MacBook尺寸优先开发
 
 【重要原则】
 - 所有布局调整和精确定位都基于MacBook屏幕尺寸进行
-- **设计尺寸参考：14英寸 MacBook (3024×1964)**
-- 所有像素级定位都以此为准，适配其他设备的工作后续单独处理
-- 网格系统、标尺系统都基于MacBook尺寸进行标定
-
-【坐标系统】
-- **坐标基准：每个功能页面完全与屏幕对齐时的坐标**
-- 第一个功能区块滑动到与屏幕完全对齐后，以该页面左上角为(0,0)
+- **设计尺寸参考：14英寸 MacBook**
 - **标准窗口尺寸：1470 × 919像素**（绝对布局基准）
-- 使用内置网格系统实时查看坐标位置
+- 所有像素级定位都以此为准，适配其他设备的工作后续单独处理
+
+【绝对坐标系统】
+- **坐标原点(0,0)：浏览器窗口左上角**
+- **定位方式：position: fixed（禁用相对定位）**
+- **坐标计算：基于浏览器窗口的绝对像素位置**
+- **验证方式：鼠标追踪工具显示实时绝对坐标**
+
+### 网格系统规范
 
 【网格系统详细规格】
 - **画布尺寸**：1470 × 919px
@@ -38,279 +40,297 @@ Row 2: [ 5] [ 6] [ 7] [ 8]
 Row 3: [ 9] [10] [11] [12]
 
 各格子左上角坐标：
-格子1: (20, 40)      格子2: (375, 40)     格子3: (730, 40)     格子4: (1085, 40)
-格子5: (20, 336.33)  格子6: (375, 336.33) 格子7: (730, 336.33) 格子8: (1085, 336.33)
-格子9: (20, 632.66)  格子10:(375, 632.66) 格子11:(730, 632.66) 格子12:(1085, 632.66)
+格子1: (20, 40)      格子2: (385, 40)     格子3: (750, 40)     格子4: (1115, 40)
+格子5: (20, 336.33)  格子6: (385, 336.33) 格子7: (750, 336.33) 格子8: (1115, 336.33)
+格子9: (20, 632.66)  格子10:(385, 632.66) 格子11:(750, 632.66) 格子12:(1115, 632.66)
 
 各格子右下角坐标：
-格子1: (355, 306.33)    格子2: (710, 306.33)    格子3: (1065, 306.33)   格子4: (1420, 306.33)
-格子5: (355, 602.66)    格子6: (710, 602.66)    格子7: (1065, 602.66)   格子8: (1420, 602.66)
-格子9: (355, 898.99)    格子10:(710, 898.99)    格子11:(1065, 898.99)   格子12:(1420, 898.99)
+格子1: (355, 306.33)    格子2: (720, 306.33)    格子3: (1085, 306.33)   格子4: (1450, 306.33)
+格子5: (355, 602.66)    格子6: (720, 602.66)    格子7: (1085, 602.66)   格子8: (1450, 602.66)
+格子9: (355, 898.99)    格子10:(720, 898.99)    格子11:(1085, 898.99)   格子12:(1450, 898.99)
 ```
 
-【关键参考线坐标】
-- **左边距线**：x = 20
-- **第1列右边界**：x = 355
-- **第2列左边界**：x = 375
-- **第2列右边界**：x = 710
-- **第3列左边界**：x = 730
-- **第3列右边界**：x = 1065
-- **第4列左边界**：x = 1085
-- **右边距线**：x = 1450
-
-- **上边距线**：y = 40
-- **第1行下边界**：y = 306.33
-- **第2行上边界**：y = 336.33
-- **第2行下边界**：y = 602.66
-- **第3行上边界**：y = 632.66
-- **下边距线**：y = 899
-
 【网格系统快捷键】：
-  - **G键** 或 **Ctrl/Cmd + G**：显示/隐藏网格系统
-  - **I键** 或 **Ctrl/Cmd + I**：显示/隐藏信息面板
-  - **Ctrl/Cmd + M**：切换鼠标追踪显示模式
-  - **S键**：显示/隐藏吸附点
-  - **H键** 或 **?键**：显示快捷键帮助
-  - **ESC键**：隐藏网格系统
+- **G键** 或 **Ctrl/Cmd + G**：显示/隐藏网格系统
+- **I键** 或 **Ctrl/Cmd + I**：显示/隐藏信息面板
+- **H键**：显示/隐藏文本框和视觉容器边框
+- **Ctrl/Cmd + M**：切换鼠标追踪显示模式
+- **S键**：显示/隐藏吸附点
+- **?键**：显示快捷键帮助
+- **ESC键**：隐藏网格系统
 
-【开发注意事项】
-- 布局指令中的坐标都基于MacBook 14英寸屏幕
-- 响应式适配暂时不考虑，专注MacBook下的精确布局
-- 所有UI测试都在MacBook环境下进行验证
+### 沟通语言规范
 
-## 一些开发规则
+【容器创建指令】
+- **"创建一个6、7格的容器"** = 创建一个容器，完全填满格子6和格子7，包括它们之间的30px栏间距
+- **容器尺寸计算**：跨格容器宽度 = 第一个格子宽度 + 栏间距 + 第二个格子宽度
+- **示例**：6、7格容器 = 335px + 30px + 335px = 700px
+
+【元素对齐指令】
+- **"某个元素与某个格子对齐"** = 元素的左上角与该格子的左上角完全重合
+- **"文本填充在某个格子"** = 文本的文本框（边界框）与该格子的边界完全重合
+- **对齐坐标**：直接使用格子左上角坐标作为元素定位参考
+
+【容器跨格计算示例】
+```
+单格容器：
+- 格子6容器：位置(375, 336.33)，尺寸335×266.33px
+
+跨格容器：
+- 格子6、7容器：位置(375, 336.33)，尺寸700×266.33px
+- 格子1、2、3容器：位置(20, 40)，尺寸1045×266.33px
+- 格子5、6、9、10容器：位置(20, 336.33)，尺寸700×562.66px
+```
+
+### 页面切换系统规范
+
+⚠️ **重要：修改页面系统前必须阅读《页面切换系统设计文档.md》**
+
+【页面结构】
+- **Hero区域**：独立页面，含文字填充动画
+- **页面系统**：Apple、AI Coding、Design、Photography四个连续页面
+- **切换原理**：Hero与页面系统间有特殊动画，页面系统内部为平滑切换
+
+【关键技术约束】
+- 所有内容页面必须在同一个`.page-container`中
+- 禁止为单独页面创建独立容器
+- 页面间切换必须是连续的，无额外动画
+- 每页高度严格为100vh
+
+## 开发规则
 
 ### 规则1：功能优先，样式延后
-
-【应该做】
 - 默认使用极简UI：白色背景、灰色边框、黑色文字
-- 只使用基础HTML元素和最简单的CSS
-- 布局使用简单的flexbox或grid，不添加任何装饰性样式
-- 按钮就是简单的矩形框+文字
+- 未经要求不添加装饰性样式（阴影、渐变、圆角等）
+- 遵循标准色彩规范（见下方色彩系统）
 
-【不应该做】
-- 未经要求不添加：阴影、渐变、动画、过渡效果、圆角、hover效果
-- 不使用任何颜色（除黑白灰外）
-- 不添加图标、装饰性元素
+## 标准色彩系统
 
-### 规则2：明确的z-index管理系统
+### 主题色彩
+基于网点蓝色图案提取的标准主题色：
 
-【应该做】
-- 建立标准层级系统：
-  * 背景层：z-index: 0-10
-  * 内容层：z-index: 100-200  
-  * 交互层：z-index: 300-400
-  * 弹窗层：z-index: 1000+
-- 每次添加元素时明确说明其所属层级
-- 使用相对定位而非绝对定位（除非必要）
+**主要蓝色系列**
+- `--color-primary-blue: #0d3fe2`    - 深邃品牌蓝（主色调）
+- `--color-secondary-blue: #4d7fff`  - 明亮辅助蓝（次要色）  
+- `--color-accent-blue: #2060ff`     - 中等过渡蓝（强调色）
 
-【验证方法】
-在每次涉及层级调整时，列出当前所有元素的z-index清单规则3：简化的Git提交策略
+**标准文字色**
+- `--color-text-primary: #888888`    - 主要文字颜色（来自主页设计）
 
-### 规则3: 当用户要求提交远程仓库时
+### 使用规范
+- **主要蓝色** (`#0d3fe2`)：用于重要按钮、品牌标识、重点强调
+- **次要蓝色** (`#4d7fff`)：用于悬浮状态、次要操作、视觉层次
+- **强调蓝色** (`#2060ff`)：用于过渡效果、边框、装饰元素
+- **文字灰色** (`#888888`)：用于主要文本内容、导航文字
 
-【token】
-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
+### 基础色彩
+保持原有的黑白灰色彩系统作为基础：
+- 纯黑 `#000000` / 纯白 `#FFFFFF`
+- 中灰 `#888888` / 浅灰 `#B0B0B0`
+- 深灰系列用于背景和容器
 
-【标准流程】
-1. "将本地所有文件强制推送到远程仓库，完全覆盖远程版本"
-2. "不需要对比差异，直接用本地版本替换"
-3. "使用 git push --force-with-lease 命令"
+### 规则2：明确的z-index管理
+- 背景层：z-index: 0-10
+- 内容层：z-index: 100-200  
+- 交互层：z-index: 300-400
+- 弹窗层：z-index: 1000+
 
-【禁止行为】
-- 不要从远程拉取代码来修改本地
-- 不要进行文件对比
-- 不要尝试合并冲突
+### 规则3：Git提交策略
+【token】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
 
-【安全提示词】
-"本地代码是最新版本，直接覆盖远程，不需要保留远程的任何更改"
+当用户要求提交远程仓库时：
+1. 将本地所有文件强制推送到远程仓库，完全覆盖远程版本
+2. 使用 `git push --force-with-lease` 命令
+3. 不从远程拉取代码来修改本地
 
-### 规则4：最小化调试输出
-
-【应该做】
-- 只在关键节点输出单行日志
-- 使用条件断点而非大量console.log
-- 调试信息格式：[时间戳][位置][值]
-- 每个函数最多1-2个调试点
-
-【不应该做】
-- 不创建独立的调试页面
-- 不输出整个对象（只输出关键属性）
-- 不在循环中添加日志
-
-【示例】
-替代："console.log('data:', data)"
-使用："console.log(`[${Date.now()}] getData: ${data.id}`);"
-
-
-### 规则5：严格的代码清理机制
-
+### 规则4：代码清理机制
 【每次修改前】
-1. "先列出所有相关的旧代码位置"
-2. "明确标记哪些需要删除，哪些需要保留"
-3. "新代码添加前，先删除冲突的旧代码"
+1. 先列出所有相关的旧代码位置
+2. 明确标记哪些需要删除，哪些需要保留
+3. 新代码添加前，先删除冲突的旧代码
 
 【CSS特别注意】
 - 添加新样式前，搜索是否有同名选择器
 - 使用更具体的类名避免冲突
-- 采用BEM命名规范
 
-【验证步骤】
-"修改完成后，列出所有被删除和新增的代码块"
-
-### 规则6：模块化开发策略
-
-【文件组织】
-- 每个功能模块独立文件，不超过300行
-- 共享变量集中在config.js
-- 使用明确的命名空间
-
-【增量开发原则】
-1. "保持现有功能不变"
-2. "新功能在独立模块中开发"
-3. "完成后再进行集成"
-
-### 规则7: 对齐操作原则
-
+### 规则5：对齐操作原则
 【元素移动时保持】
 - 宽度、高度（除非明确要求调整）
 - 内部布局（文字居中、内边距等）
 - 字体大小、颜色等样式
-- 元素的形状和比例
 
 【仅改变】
 - 位置（left, top, margin, transform: translate）
 - 不影响元素本身尺寸的定位属性
 
-【标准对齐指令解析】
-"将X与Y左对齐" = 只调整X的左边界位置，保持X的宽度
-"将X移动到Y" = 只改变X的位置，不改变X的尺寸
-"将X对齐到网格线" = 移动X整体，不拉伸或压缩X
+### 规则6：字号规范标准
+【标准字号规格】
+- **主标题**：48px（详情页标题、项目标题）
+- **副标题/正文**：16px（描述文字、副标题）
+- **页面标题**：48px（主页面标题）
+- **页面副标题**：16px（页面副标题）
+- **交互文字**：18px（交互提示文字）
 
-### 规则8: 全屏分页滚动布局系统
+【字体族标准】
+- **中文标题**：'Noto Serif SC', serif
+- **英文标题**：'Noto Serif SC', serif  
+- **正文描述**：'Courier Prime', monospace
+- **交互文字**：'Courier Prime', monospace
 
-【核心架构原则】
-- **页面间：相对布局** - 各页面之间使用相对定位进行排列
-- **页面内：绝对布局** - 页面内所有元素使用绝对定位布局
-- **元素相对静止** - 页面切换时，页面内元素与页面保持相对位置不变
+【应用场景】
+- Apple详情页：标题48px，描述16px
+- AI Coding详情页：项目标题48px，副标题16px，正文16px
+- 主页面：页面标题48px，页面副标题16px，描述16px
 
-【页面结构定义】
-1. **Hero Zone**: 保持独立，含文字填充动画
-2. **功能页面**: 01-04共4个独立全屏页面，每个高度=100vh
-3. **切换方式**: 吸附滚动，不允许停留在页面中间位置
+### 规则7：详情页开发标准流程
 
-【布局实现规则】
-- 页面容器高度：400vh（4个页面×100vh）
-- 页面定位：
-  ```css
-  .content-section:nth-child(1) { top: 0; }
-  .content-section:nth-child(2) { top: 100vh; }
-  .content-section:nth-child(3) { top: 200vh; }
-  .content-section:nth-child(4) { top: 300vh; }
-  ```
-- 页面内元素：
-  ```css
-  .feature-grid {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-  }
-  ```
+⚠️ **重要：开发任何新详情页前必须完成以下流程分析**
 
-【滚动行为规则】
-- **吸附滚动**：启用 `scroll-snap-type: y mandatory`
-- **平滑过渡**：800ms 动画时间
-- **防止中间停留**：`scroll-snap-align: start` + `scroll-snap-stop: always`
+#### 🔍 第一阶段：需求对比分析
+**必须明确的差异点：**
+- 容器数量对比（苹果15个 vs 新页面?个）
+- 容器尺寸对比（苹果719×719 vs 新页面?×?）
+- 容器间距是否一致（苹果100px间距）
+- 文本内容结构差异（标题、副标题、正文）
 
-【交互方式】
-- 鼠标滚轮：上下切换页面
-- 键盘导航：1-4数字键直接跳转，↑↓方向键顺序切换
-- 页面指示器：右侧圆点，点击跳转
-- 返回按钮：回到Hero Zone
+#### 📖 第二阶段：参考页面深度分析
+**必须仔细阅读苹果详情页：**
 
-【文件组织】
-- 样式：`css/page-snap-fixed.css`
-- 逻辑：`js/page-snap-fixed.js`
-- 与原有动画系统协同工作，不破坏Hero Zone的填充动画
+1. **HTML结构分析**
+   ```html
+   <!-- 苹果详情页结构模板 -->
+   <div class="apple-detail-page">
+     <div class="detail-page-content">
+       <div class="back-button"></div>
+       <div class="detail-content"></div>
+       <div class="apple-container"></div> <!-- ×15个 -->
+     </div>
+   </div>
+   ```
 
-【重要约束】
-- 页面切换时元素位置必须保持稳定，不允许位置突变
-- 每个页面必须完全填满屏幕（100vh）
-- 页面间不能有连续滚动，必须吸附到完整页面
+2. **CSS样式分析**
+   - 页面高度：`height: 100vh`（固定窗口）
+   - 内容高度：`min-height: 12521px`（最后容器底部）
+   - 容器定位：绝对定位，精确计算间距
+   - 滚动方式：`overflow-y: auto`
 
+3. **JavaScript交互分析**
+   - 点击区域：`.apple-image`（整个图片）
+   - 跳转逻辑：`detailPage.classList.add('active')`
+   - 返回逻辑：`detailPage.classList.remove('active')`
+   - 滚动处理：阻止主页面滚动事件
+
+4. **高度计算公式理解**
+   ```
+   苹果页面总高度 = 最后容器top + 容器高度
+   = 11802px + 719px = 12521px
+   ```
+
+#### 📐 第三阶段：新页面精确计算
+**基于参考分析进行适配计算：**
+
+1. **容器布局计算**
+   ```
+   第1个容器: top = 336px（与苹果页面保持一致）
+   第2个容器: top = 第1个top + 容器高度 + 间距
+   第3个容器: top = 第2个top + 容器高度 + 间距
+   ```
+
+2. **页面高度计算**
+   ```
+   新页面总高度 = 最后容器top + 最后容器高度
+   AI页面: 1761.32 + 612.66 = 2374px
+   ```
+
+3. **容器右边缘对齐**
+   ```
+   容器left = 页面宽度 - 容器宽度
+   AI页面: 1470 - 1065 = 405px
+   ```
+
+#### 🎨 第四阶段：独立设计（避免盲目复用）
+**创建专用的CSS类名：**
+```css
+/* ❌ 错误：复用通用类名 */
+.detail-page-content { min-height: 12521px; }
+
+/* ✅ 正确：专用类名 */
+.apple-detail-content { min-height: 12521px; }
+.ai-detail-content { min-height: 2374px; }
+.design-detail-content { min-height: ?px; }
+```
+
+#### 💻 第五阶段：开发实施清单
+**HTML结构：**
+- [ ] 复制苹果详情页HTML框架
+- [ ] 修改页面类名（ai-detail-page）
+- [ ] 修改容器类名（ai-container）
+- [ ] 添加项目专用文本结构
+
+**CSS样式：**
+- [ ] 创建页面专用样式类
+- [ ] 设置正确的页面高度
+- [ ] 计算容器的精确位置
+- [ ] 应用标准字号规范（48px/16px）
+
+**JavaScript交互：**
+- [ ] 复制苹果详情页JS逻辑
+- [ ] 修改DOM选择器（ai-detail-page）
+- [ ] 绑定正确的点击区域
+- [ ] 更新网格系统坐标支持
+
+#### ✅ 第六阶段：功能验证清单
+**必须验证的功能点：**
+- [ ] 页面高度：滚动到底部坐标是否为计算值
+- [ ] 点击跳转：整个内容区域是否可点击
+- [ ] 页面切换：动画是否流畅
+- [ ] 返回功能：返回按钮是否正常
+- [ ] 滚动隔离：详情页滚动不影响主页面
+- [ ] 网格系统：坐标显示是否正确
+- [ ] 字号规范：是否符合48px/16px标准
+
+#### 🚫 严禁事项
+- **禁止直接复制粘贴**：必须理解每一行代码的作用
+- **禁止盲目复用类名**：不同页面必须用不同类名
+- **禁止跳过计算**：所有数值必须精确计算，不能估算
+- **禁止修改无关代码**：专注当前页面，不要影响其他功能
+
+#### 📝 开发记录要求
+每次开发新详情页时必须记录：
+- 参考分析结果
+- 计算过程和公式
+- 遇到的问题和解决方案
+- 与参考页面的主要差异点
 
 ## Architecture
 
 ### Core Files
+- **index.html** - 主要网站文件
+- **css/base.css** - 基础样式（变量、字体、重置）
+- **css/pages.css** - 页面布局样式
+- **css/hero.css** - Hero区域样式
+- **css/navigation.css** - 导航栏样式
+- **css/grid-system.css** - 网格系统样式
+- **js/page-system.js** - 页面切换系统
+- **js/grid-system.js** - 网格系统（合并版）
 
-1. **index.html** - Main portfolio site
-   - Single-file architecture with embedded CSS and JavaScript
-   - ~1900 lines containing all styles, HTML structure, and scripts
-   - No external dependencies or frameworks
+### Key Features
+- **多语言支持**：英文/中文切换，通过`data-en`和`data-zh`属性
+- **视频背景系统**：6个MP4视频自动轮播
+- **页面切换系统**：Hero区域与4个内容页面的流畅切换
+- **精确网格系统**：12格布局，支持实时坐标显示
 
-2. **pixel-art-optimized.html** - Static pixel art display
-   - Standalone page with grid-based CSS pixel art
-   - Uses pre-calculated color indices for optimized rendering
-
-### Key Features & Implementation
-
-#### Video Background System
-- **Location**: `Video2/` directory contains 6 MP4 videos (1.mp4 - 6.mp4)
-- **Behavior**: Auto-cycles through videos with fade transitions
-- **Critical Sizing Fix**: Videos have 3:2 aspect ratio. Container uses:
-  ```css
-  width: min(50vw, calc((100vh - 56px) * 2 / 3));
-  height: calc(100vh - 56px);
-  ```
-  This prevents cropping when browser width increases.
-
-#### Text Fill Animation on Scroll
-- Gray stroke text fills to black as user scrolls
-- Implementation: CSS mask with gradient adjusted via JavaScript based on scroll position
-- Located in `.text-fill` class with mask-image linear gradient
-
-#### Multi-Language Support
-- Toggle between English and Chinese via navigation button
-- Implementation: `data-en` and `data-zh` attributes on elements
-- Font switching: Courier Prime (English) ↔ Noto Serif SC (Chinese)
-- Body class toggle: `body.chinese` applies Chinese font family
-
-#### Navigation System
-- Fixed header with dropdown menus
-- Hover state: `#3398fe` (bright blue)
-- Z-index hierarchy:
-  - Navigation: 1000
-  - Dropdown overlay: 999
-  - Video container: 10
-  - Main content: 2
-
-### JavaScript Behaviors
-
-- **Smooth scrolling**: Custom scroll handling between sections
-- **Video lifecycle**: Preloading, playback control, and transition management
-- **Language switching**: Updates all text content and fonts dynamically
-- **Dropdown menus**: Mouse hover interactions with overlay system
-
-## Common Development Tasks
-
-### Viewing the Site
+### Common Development Tasks
 ```bash
+# 查看网站
 open index.html
+
+# 测试网格系统
+按G键显示网格，按H键显示文本框边框
 ```
 
-### Key Modification Points
-
-- **Colors**: Search for `#3398fe` (primary blue), `var(--color-*)` CSS variables
-- **Videos**: Replace files in `Video2/` directory (maintain 1-6.mp4 naming)
-- **Fonts**: Local font files in `fonts/` directory
-- **Language content**: Update `data-en` and `data-zh` attributes
-- **Animation timing**: Modify animation durations in CSS `@keyframes` rules
-
 ## Technical Constraints
-
-- Pure static HTML/CSS/JS - no build tools, bundlers, or transpilation
-- All styles and scripts embedded in HTML files
-- Videos must be MP4 format for browser compatibility
-- Font files loaded locally (no CDN dependencies)
-- No external libraries or frameworks
+- 纯静态HTML/CSS/JS，无构建工具
+- 专注MacBook 14英寸优化
+- 所有素材本地加载，无CDN依赖
+- 字体：Courier Prime（英文）、Noto Serif SC（中文）

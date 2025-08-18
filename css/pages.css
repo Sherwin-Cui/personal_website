@@ -1,0 +1,1279 @@
+/* 页面系统 - 基于1470×919画布的绝对布局 */
+
+/* 页面容器 - 固定尺寸1470×919 */
+.page-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 1470px;
+    height: 919px;
+    background: var(--color-pure-white);
+    z-index: 200;
+    /* 初始状态：在下方 */
+    transform: translateY(919px);
+    pointer-events: none;
+    overflow: hidden;
+    /* 进入/退出动画：更强的阻尼效果 */
+    transition: transform 1000ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.page-container.active {
+    transform: translateY(0);
+    pointer-events: all;
+}
+
+/* 页面内容容器 - 实现阻尼滚动 */
+.page-inner {
+    position: relative;
+    width: 1470px;
+    height: 3676px; /* 4个页面 × 919px */
+    /* 关键：更强的阻尼效果配置 */
+    transition: transform 1000ms cubic-bezier(0.19, 1, 0.22, 1);
+    will-change: transform;
+}
+
+/* 单个页面 - 固定尺寸1470×919 */
+.page {
+    position: relative;
+    width: 1470px;
+    height: 919px;
+    background: var(--color-pure-white);
+}
+
+/* 页面内容布局 - 统一1470×919固定尺寸 */
+.page-content {
+    position: absolute;
+    width: 1470px;
+    height: 919px;
+    top: 0;
+    left: 0;
+    /* 统一标准：1:1坐标，无变换，无padding */
+}
+
+/* 苹果页面专用布局 */
+/* 苹果页面：内容容器不定位，让子元素自由定位 */
+.page[data-page="1"] .content-left {
+    position: static;
+}
+
+.page[data-page="1"] .content-right {
+    position: static;
+}
+
+/* 其他页面保持原布局 */
+.page:not([data-page="1"]):not([data-page="3"]) .content-left {
+    position: absolute;
+    left: 20px;
+    top: 40px;
+    width: 880px; /* 60% of 1470 */
+    height: 839px; /* 919 - 40 - 40 */
+}
+
+.page:not([data-page="1"]):not([data-page="3"]) .content-right {
+    position: absolute;
+    right: 20px;
+    top: 40px;
+    width: 570px; /* 40% of 1470 - margins */
+    height: 839px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 平面设计页面内容区域 - 调整为适配视频比例 */
+.page[data-page="3"] .content-right {
+    position: absolute;
+    left: 812px; /* 调整左边框位置：1469 - 657 = 812px */
+    top: 40px; /* 起始y坐标 */
+    width: 657px; /* 适配视频比例：878 × (958/1280) = 657px */
+    height: 878px; /* 918 - 40 = 878px */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 平面设计页面视觉区域 - 填满content-right容器 */
+.page[data-page="3"] .visual-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--color-off-white);
+}
+
+/* 平面设计页面视频轮播 */
+.design-video-carousel {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+/* 视频容器 */
+.design-videos-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    transition: transform 600ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.design-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: 0;
+    /* 移除过渡效果，直接切换 */
+}
+
+.design-video.active {
+    opacity: 1;
+}
+
+/* hover时视频向右移动50px */
+.page[data-page="3"] .visual-area:hover .design-videos-container {
+    transform: translateX(50px);
+}
+
+/* 平面设计页面交互背景 */
+.page[data-page="3"] .design-interaction-background {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-primary-blue); /* 主要蓝色 */
+    z-index: 1; /* 最底层 */
+}
+
+/* 平面设计页面交互文字 - 使用页面绝对坐标 */
+.page[data-page="3"] .design-interaction-text {
+    position: absolute;
+    left: 836px; /* 露出区域中央：(812 + 860) / 2 = 836 */
+    top: 460px; /* 略高于中央：(40 + 919) / 2 = 479.5，向上调整 */
+    color: white;
+    font-size: 18px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    z-index: 2;
+    pointer-events: none;
+    white-space: nowrap;
+    transform: translateX(-50%) translateY(-50%); /* 中心对齐 */
+}
+
+/* 平面设计页面箭头动画 - 使用页面绝对坐标 */
+.page[data-page="3"] .design-interaction-arrow {
+    position: absolute;
+    left: 836px; /* 露出区域中央：(812 + 860) / 2 = 836 */
+    top: 500px; /* 交互文字下方：460 + 40 = 500 */
+    width: 48px;
+    height: 48px;
+    overflow: hidden;
+    z-index: 2;
+    pointer-events: none;
+    transform: translateX(-50%) translateY(-50%); /* 中心对齐 */
+}
+
+/* 苹果页面标题 - 填充在格子3 */
+.page[data-page="1"] .page-title {
+    position: absolute;
+    left: 750px; /* 格子3左上角坐标 */
+    top: 40px; /* 格子3左上角坐标 */
+    width: 335px; /* 格子3宽度 */
+    height: 266.33px; /* 格子3高度 */
+    font-family: 'Noto Serif SC', serif;
+    font-size: 48px;
+    font-weight: 200;
+    color: var(--color-pure-black);
+    line-height: 1.2;
+    margin: 0;
+    padding: 0;
+    /* 文本左上角对齐，不居中 */
+}
+
+/* 苹果页面描述 - 格子7、8连着位置 */
+.page[data-page="1"] .page-description {
+    position: absolute;
+    left: 750px; /* 格子7左上角坐标 */
+    top: 336.33px; /* 格子7左上角坐标 */
+    width: 700px; /* 格子7、8连着：335 + 30 + 335 = 700px */
+    height: 266.33px; /* 格子高度 */
+    font-family: 'Courier Prime', monospace;
+    font-size: 16px;
+    color: var(--color-pure-black);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+/* AI Coding页面标题 - 特殊定位 */
+.page[data-page="2"] .page-title {
+    position: absolute;
+    left: 20px;
+    top: 150px;
+    font-family: 'Noto Serif SC', serif;
+    font-size: 48px;
+    font-weight: 200;
+    color: var(--color-pure-black);
+    line-height: 1.2;
+    margin: 0;
+    max-width: 300px;
+}
+
+
+/* AI Coding页面描述 - 特殊定位 */
+.page[data-page="2"] .page-description {
+    position: absolute;
+    left: 385px;
+    top: 150px;
+    width: 700px; /* 从385拉伸到1085: 1085-385=700px */
+    font-family: 'Courier Prime', monospace;
+    font-size: 16px;
+    color: var(--color-pure-black);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+/* 其他页面标题（除苹果页面和AI Coding页面） */
+.page:not([data-page="1"]):not([data-page="2"]):not([data-page="3"]) .page-title {
+    position: absolute;
+    left: 20px; /* 网格边距 */
+    top: 160px; /* 调整到合适位置 */
+    font-family: 'Noto Serif SC', serif;
+    font-size: 48px;
+    font-weight: 200;
+    color: var(--color-pure-black);
+    line-height: 1.2;
+    margin: 0;
+    max-width: 800px;
+}
+
+/* 平面设计页面标题 - 填充在格子5 */
+.page[data-page="3"] .page-title {
+    position: absolute;
+    left: 20px; /* 格子5左上角坐标 */
+    top: 336.33px; /* 格子5左上角坐标 */
+    width: 335px; /* 格子5宽度 */
+    height: 266.33px; /* 格子5高度 */
+    font-family: 'Noto Serif SC', serif;
+    font-size: 48px;
+    font-weight: 200;
+    color: var(--color-pure-black);
+    line-height: 1.2;
+    margin: 0;
+    padding: 0;
+}
+
+/* 其他页面描述（除苹果页面和AI Coding页面） */
+.page:not([data-page="1"]):not([data-page="2"]):not([data-page="3"]) .page-description {
+    position: absolute;
+    left: 20px; /* 网格边距 */
+    top: 320px; /* 调整到合适位置 */
+    font-family: 'Courier Prime', monospace;
+    font-size: 16px;
+    color: var(--color-pure-black);
+    line-height: 1.6;
+    margin: 0;
+    max-width: 800px;
+}
+
+/* 平面设计页面描述 - 填充在格子10 */
+.page[data-page="3"] .page-description {
+    position: absolute;
+    left: 385px; /* 格子10左上角坐标 */
+    top: 632.66px; /* 格子10左上角坐标 */
+    width: 335px; /* 格子10宽度 */
+    height: 266.33px; /* 格子10高度 */
+    font-family: 'Courier Prime', monospace;
+    font-size: 16px;
+    color: var(--color-pure-black);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+/* 默认视觉区域 */
+.page:not([data-page="1"]):not([data-page="2"]):not([data-page="3"]) .visual-area {
+    width: 400px;
+    height: 300px;
+    background: var(--color-off-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Courier Prime', monospace;
+    color: var(--color-medium-gray);
+    font-size: 14px;
+}
+
+/* AI Coding页面视觉区域 - 格子6、7、8、10、11、12 */
+.page[data-page="2"] .visual-area {
+    position: absolute;
+    left: 385px; /* 格子6左上角 */
+    top: 336.33px; /* 格子6顶部 */
+    width: 1065px; /* 3格+2间距: 335+30+335+30+335 */
+    height: 612.66px; /* 增加50px以容纳下移动画: 562.66 + 50 */
+    overflow: hidden;
+    background: var(--color-off-white);
+}
+
+/* AI Coding页面iframe */
+.page[data-page="2"] .ai-iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    z-index: 3; /* 恢复最高层级，遮住交互元素 */
+    transition: transform 600ms cubic-bezier(0.19, 1, 0.22, 1);
+    cursor: pointer;
+    pointer-events: auto; /* 恢复iframe的正常交互 */
+}
+
+/* iframe加载失败时的fallback */
+.page[data-page="2"] .ai-fallback {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    transition: transform 600ms cubic-bezier(0.19, 1, 0.22, 1);
+    cursor: pointer;
+    display: none; /* 默认隐藏，JS控制显示 */
+    background: var(--color-off-white);
+    align-items: center;
+    justify-content: center;
+    font-family: 'Courier Prime', monospace;
+    color: var(--color-medium-gray);
+    font-size: 16px;
+}
+
+/* fallback hover效果 */
+.page[data-page="2"] .visual-area:hover .ai-fallback {
+    transform: translateY(50px);
+}
+
+/* iframe hover效果 - 向下移动50px */
+.page[data-page="2"] .visual-area:hover .ai-iframe {
+    transform: translateY(50px);
+}
+
+/* AI Coding页面交互背景 */
+.page[data-page="2"] .ai-interaction-background {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-primary-blue); /* 主要蓝色 */
+    z-index: 1; /* 最底层 */
+}
+
+/* AI Coding页面交互文字 - 绝对定位 */
+.page[data-page="2"] .ai-interaction-text {
+    position: absolute;
+    left: 400px; /* 相对于容器 */
+    top: 17px; /* 上移8px: 25-8=17 */
+    color: white;
+    font-size: 18px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* AI Coding页面箭头动画 - 绝对定位 */
+.page[data-page="2"] .ai-interaction-arrow {
+    position: absolute;
+    left: 660px; /* 右移60px: 600+60=660 */
+    top: 7px; /* 上移8px: 15-8=7 */
+    width: 38.4px; /* 缩小20%: 48 * 0.8 = 38.4 */
+    height: 38.4px; /* 缩小20%: 48 * 0.8 = 38.4 */
+    overflow: hidden;
+    z-index: 2;
+    pointer-events: none;
+}
+
+
+/* 苹果页面内容框 - 左下角(0,918)右上角格子6右上角 */
+.page[data-page="1"] .visual-area {
+    position: absolute;
+    left: 0px; /* 左下角(0,918) */
+    top: 336.33px; /* 格子6顶部坐标 */
+    width: 720px; /* 格子6右边界：385+335=720px */
+    height: 581.67px; /* 918 - 336.33 = 581.67px */
+    overflow: hidden; /* 裁切溢出内容 */
+}
+
+/* 苹果页面图片 - 填充容器，裁切溢出 */
+.page[data-page="1"] .apple-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 保持比例，裁切溢出部分 */
+    object-position: center; /* 从中心裁切 */
+    z-index: 3; /* 最高层级，遮住交互元素 */
+    transition: transform 600ms cubic-bezier(0.19, 1, 0.22, 1);
+    cursor: pointer;
+}
+
+/* 图片hover效果 - 向左移动50px */
+.page[data-page="1"] .visual-area:hover .apple-image {
+    transform: translateX(-50px);
+}
+
+/* 删除hover显示效果 - 元素始终存在，通过图片移动露出 */
+
+/* 苹果页面交互元素 - 绝对定位 */
+
+/* 蓝色背景色块 - 移到visual-area内部 */
+.page[data-page="1"] .apple-interaction-background {
+    position: absolute;
+    left: 0px; /* 从visual-area左边界开始 */
+    top: 0px; /* visual-area内部坐标 */
+    width: 100%; /* 填满visual-area */
+    height: 100%;
+    background-color: var(--color-primary-blue); /* 主要蓝色 */
+    z-index: 1; /* 在图片后面 */
+}
+
+/* 竖向文字 */
+.page[data-page="1"] .apple-interaction-text {
+    position: absolute;
+    left: 693px; /* 精确定位 */
+    bottom: 169px; /* 从底部算起: 919 - 750 = 169 */
+    color: white;
+    font-size: 18px;
+    font-weight: 300;
+    letter-spacing: 8px; /* 竖向排列效果 */
+    writing-mode: vertical-rl; /* 竖向文字 */
+    text-orientation: mixed;
+    z-index: 2; /* 在背景之上，图片之下 */
+    transform: translateX(-50%); /* 水平居中 */
+    pointer-events: none; /* 不阻挡鼠标交互 */
+}
+
+/* 箭头动画容器 */
+.page[data-page="1"] .apple-interaction-arrow {
+    position: absolute;
+    left: 693px; /* 动画中心位于该坐标 */
+    top: 38.67px; /* 相对于visual-area内部: 375 - 336.33 = 38.67 */
+    width: 48px;
+    height: 48px;
+    overflow: hidden;
+    z-index: 2; /* 在背景之上，图片之下 */
+    transform: translateX(-50%) translateY(-50%); /* 中心对齐 */
+    pointer-events: none; /* 不阻挡鼠标交互 */
+}
+
+/* 箭头动画包装器 */
+.arrow-animation {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+/* 底部固定的横线 */
+.arrow-animation::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: white;
+    z-index: 1;
+}
+
+/* 箭头包装器 */
+.arrow-wrapper {
+    position: absolute;
+    width: 100%;
+    height: 200%; /* 两倍高度，包含两个箭头 */
+    bottom: 0; /* 初始位置：第一个箭头底部与底线接触 */
+    animation: continuous-slide 1.4s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+/* 单个箭头 */
+.arrow {
+    position: absolute;
+    width: 100%;
+    height: 50%; /* 每个箭头占wrapper的一半 */
+}
+
+.arrow:nth-child(1) {
+    top: 0;
+}
+
+.arrow:nth-child(2) {
+    top: 50%;
+}
+
+/* SVG箭头样式 */
+.arrow svg {
+    width: 100%;
+    height: 100%;
+}
+
+/* 对称的动画：从底部开始，回到底部，带停顿 */
+@keyframes continuous-slide {
+    0%, 14.3% {
+        transform: translateY(0); /* 停顿0.2秒 (0.2/1.4 = 14.3%) */
+    }
+    100% {
+        transform: translateY(50%); /* 移动wrapper高度的50%，让第二个箭头到达第一个箭头的初始位置 */
+    }
+}
+
+
+/* H键功能：显示文本框和视觉区域边框 */
+body.show-text-boxes .page-title,
+body.show-text-boxes .page-description {
+    border: 2px solid rgba(255, 0, 0, 0.5) !important;
+    background: rgba(255, 0, 0, 0.1) !important;
+}
+
+body.show-text-boxes .visual-area {
+    border: 2px solid rgba(0, 255, 0, 0.5) !important;
+    background: rgba(0, 255, 0, 0.05) !important;
+}
+
+/* 中文字体适配 - 统一使用Noto Serif SC ExtraLight */
+body.chinese .page-title,
+body.chinese .page-description,
+body.chinese .detail-title,
+body.chinese .detail-description,
+body.chinese .back-text,
+body.chinese .apple-interaction-text,
+body.chinese .ai-interaction-text,
+body.chinese .design-interaction-text,
+body.chinese .visual-area span,
+body.chinese .ai-project-title,
+body.chinese .ai-project-subtitle,
+body.chinese .ai-project-description,
+body.chinese .design-project-title,
+body.chinese .design-project-description,
+body.chinese .design-typewriter,
+body.chinese .design-typewriter-text,
+body.chinese .contact-title {
+    font-family: 'Noto Serif SC', serif !important;
+    font-weight: 200 !important; /* 确保使用ExtraLight字重 */
+}
+
+
+/* 苹果详情页面 */
+.apple-detail-page {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 1470px;
+    height: 100vh; /* 使用视口高度 */
+    background: var(--color-pure-white);
+    z-index: 300; /* 在所有页面上方 */
+    /* 初始状态：在右侧 */
+    transform: translateX(1470px);
+    transition: transform 1000ms cubic-bezier(0.19, 1, 0.22, 1);
+    overflow-y: auto; /* 允许垂直滚动 */
+}
+
+/* 详情页面激活状态 */
+.apple-detail-page.active {
+    transform: translateX(0);
+}
+
+/* 详情页面内容容器 */
+.detail-page-content {
+    position: relative; /* 改为相对定位让内容自然扩展 */
+    width: 1470px;
+    min-height: 12521px; /* 最小高度：最后一个容器底部 11802 + 719 = 12521px */
+    padding-bottom: 0; /* 无底部边距 */
+}
+
+/* 返回按钮 - 绝对定位 */
+.back-button {
+    position: absolute;
+    left: 40px;
+    top: 70px; /* 向下移动30px: 40 + 30 = 70 */
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    z-index: 10;
+}
+
+/* 返回箭头容器 */
+.back-arrow {
+    position: relative;
+    width: 48px;
+    height: 48px;
+    overflow: hidden;
+    margin-right: 15px;
+    transform: rotate(90deg); /* 顺时针90度使箭头朝左 */
+}
+
+/* 底部固定的横线 */
+.back-arrow::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--color-pure-black);
+    z-index: 1;
+}
+
+/* 箭头包装器 */
+.back-arrow-wrapper {
+    position: absolute;
+    width: 100%;
+    height: 200%; /* 两倍高度，包含两个箭头 */
+    bottom: 0; /* 初始位置：第一个箭头底部与底线接触 */
+    animation: back-arrow-slide 1.4s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+/* 单个箭头 */
+.back-arrow-item {
+    position: absolute;
+    width: 100%;
+    height: 50%; /* 每个箭头占wrapper的一半 */
+}
+
+.back-arrow-item:nth-child(1) {
+    top: 0;
+}
+
+.back-arrow-item:nth-child(2) {
+    top: 50%;
+}
+
+/* SVG箭头样式 */
+.back-arrow-item svg {
+    width: 100%;
+    height: 100%;
+}
+
+/* 返回箭头动画 */
+@keyframes back-arrow-slide {
+    0%, 14.3% {
+        transform: translateY(0); /* 停顿0.2秒 (0.2/1.4 = 14.3%) */
+    }
+    100% {
+        transform: translateY(50%); /* 移动wrapper高度的50%，让第二个箭头到达第一个箭头的初始位置 */
+    }
+}
+
+/* 返回文字 */
+.back-text {
+    color: var(--color-pure-black);
+    font-size: 16px;
+    font-weight: 300;
+    font-family: 'Courier Prime', monospace;
+}
+
+/* 详情页面标题 - 填充格子5、6 */
+.detail-title {
+    position: absolute;
+    left: 20px; /* 格子5、6左上角坐标 */
+    top: 336.33px; /* 格子5、6左上角坐标 */
+    width: 700px; /* 格子5、6连着：335 + 30 + 335 = 700px */
+    height: 266.33px; /* 格子高度 */
+    font-family: 'Noto Serif SC', serif;
+    font-size: 48px;
+    font-weight: 200;
+    color: var(--color-pure-black);
+    line-height: 1.2;
+    margin: 0;
+    padding: 0;
+}
+
+/* 详情页面正文 - 填充格子9、10 */
+.detail-description {
+    position: absolute;
+    left: 20px; /* 格子9、10左上角坐标 */
+    top: 632.66px; /* 格子9、10左上角坐标 */
+    width: 700px; /* 格子9、10连着：335 + 30 + 335 = 700px */
+    height: 266.33px; /* 格子高度 */
+    font-family: 'Noto Serif SC', serif;
+    font-size: 16px;
+    color: var(--color-pure-black);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+/* 苹果图片容器样式 */
+.apple-container {
+    background: var(--color-off-white);
+    overflow: hidden;
+}
+
+/* 苹果详情图片样式 */
+.apple-detail-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+/* AI Coding详情页面 */
+.ai-detail-page {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 1470px;
+    height: 919px; /* 固定窗口高度：919px */
+    background: var(--color-pure-white);
+    z-index: 300; /* 在所有页面上方 */
+    /* 初始状态：在右侧 */
+    transform: translateX(1470px);
+    transition: transform 1000ms cubic-bezier(0.19, 1, 0.22, 1);
+    overflow-y: scroll; /* 垂直滚动查看长内容 */
+    overflow-x: hidden; /* 禁止水平滚动 */
+}
+
+/* AI详情页面激活状态 */
+.ai-detail-page.active {
+    transform: translateX(0);
+}
+
+/* AI详情页面内容容器 - 长页面容器 */
+.ai-detail-page .detail-page-content {
+    position: relative; /* 相对定位让内容自然流动 */
+    width: 1470px;
+    min-height: 2574px !important; /* 覆盖通用样式：第三个容器底部 1961.32 + 612.66 = 2574px */
+    height: 2574px; /* 绝对总高度 */
+    padding-bottom: 0; /* 无底部边距 */
+}
+
+/* AI详情页面正文 - 填充格子9 */
+.ai-detail-page .detail-description {
+    position: absolute;
+    left: 20px; /* 格子9左上角坐标 */
+    top: 632.66px; /* 格子9左上角坐标 */
+    width: 335px; /* 格子9宽度 */
+    height: 266.33px; /* 格子高度 */
+    font-family: 'Noto Serif SC', serif;
+    font-size: 16px;
+    color: var(--color-pure-black);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+/* AI项目容器样式 */
+.ai-container {
+    background: var(--color-off-white);
+    overflow: hidden;
+}
+
+/* AI项目内容样式 */
+.ai-project-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Courier Prime', monospace;
+    color: var(--color-medium-gray);
+    font-size: 16px;
+}
+
+/* AI项目文本容器 */
+.ai-project-text {
+    position: absolute;
+    left: 20px; /* 左侧边距 */
+    width: 335px; /* 与容器对应的文本宽度 */
+}
+
+/* 容器1对应文本位置 */
+.ai-project-text[data-project="1"] {
+    top: 336px; /* 与第一个容器对齐 */
+}
+
+/* 容器2对应文本位置 */
+.ai-project-text[data-project="2"] {
+    top: 1148.66px; /* 与第二个容器对齐 */
+}
+
+/* 容器3对应文本位置 */
+.ai-project-text[data-project="3"] {
+    top: 1961.32px; /* 与第三个容器对齐 */
+}
+
+/* AI项目标题样式 */
+.ai-project-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 48px; /* 与Apple页面标题一致 */
+    font-weight: 200;
+    color: var(--color-pure-black);
+    line-height: 1.2;
+    margin: 0 0 10px 0;
+}
+
+/* AI项目副标题样式 */
+.ai-project-subtitle {
+    font-family: 'Courier Prime', monospace;
+    font-size: 16px; /* 与Apple页面描述一致 */
+    font-weight: 300;
+    color: var(--color-pure-black);
+    line-height: 1.4;
+    margin: 0 0 20px 0;
+}
+
+/* AI项目描述样式 */
+.ai-project-description {
+    font-family: 'Courier Prime', monospace;
+    font-size: 16px; /* 与Apple页面描述一致 */
+    color: var(--color-pure-black);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* AI项目视频样式 */
+.ai-project-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+/* AI项目iframe样式 */
+.ai-project-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+}
+
+/* AI项目iframe加载失败时的fallback */
+.ai-project-fallback {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none; /* 默认隐藏，JS控制显示 */
+    align-items: center;
+    justify-content: center;
+    background: var(--color-off-white);
+    font-family: 'Courier Prime', monospace;
+    color: var(--color-medium-gray);
+    font-size: 16px;
+}
+
+/* 平面设计详情页面 */
+.design-detail-page {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 1470px;
+    height: 919px; /* 固定窗口高度：919px */
+    background: var(--color-pure-white);
+    z-index: 300; /* 在所有页面上方 */
+    /* 初始状态：在左侧 */
+    transform: translateX(-1470px);
+    transition: transform 1000ms cubic-bezier(0.19, 1, 0.22, 1);
+    overflow-y: scroll; /* 垂直滚动查看长内容 */
+    overflow-x: hidden; /* 禁止水平滚动 */
+}
+
+/* 设计详情页面激活状态 */
+.design-detail-page.active {
+    transform: translateX(0);
+}
+
+/* 设计详情页面内容容器 - 长页面容器 */
+.design-detail-page .detail-page-content {
+    position: relative; /* 相对定位让内容自然流动 */
+    width: 1470px;
+    min-height: 7656.96px !important; /* 第七个容器底部 6236.96 + 1420 = 7656.96px */
+    height: 7656.96px; /* 绝对总高度 */
+    padding-bottom: 0; /* 无底部边距 */
+}
+
+/* 设计项目容器样式 */
+.design-container {
+    background: transparent;
+    overflow: hidden;
+}
+
+/* 设计项目内容样式 */
+.design-project-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Courier Prime', monospace;
+    color: var(--color-medium-gray);
+    font-size: 16px;
+}
+
+/* 设计项目文本容器 */
+.design-project-text {
+    position: absolute;
+    left: 20px; /* 左侧边距 */
+    width: 335px; /* 与容器对应的文本宽度 */
+}
+
+/* 容器1对应文本位置 */
+.design-project-text[data-project="1"] {
+    top: 1361px; /* 与第一个容器对齐 */
+}
+
+/* 容器2对应文本位置 */
+.design-project-text[data-project="2"] {
+    top: 2173.66px; /* 与第二个容器对齐 */
+}
+
+/* 容器3对应文本位置 */
+.design-project-text[data-project="3"] {
+    top: 2986.32px; /* 与第三个容器对齐 */
+}
+
+/* 容器4对应文本位置 */
+.design-project-text[data-project="4"] {
+    top: 3798.98px; /* 与第四个容器对齐 */
+}
+
+/* 容器5对应文本位置 */
+.design-project-text[data-project="5"] {
+    top: 4611.64px; /* 与第五个容器对齐 */
+}
+
+/* 容器6对应文本位置 */
+.design-project-text[data-project="6"] {
+    top: 5424.30px; /* 与第六个容器对齐 */
+}
+
+/* 容器7对应文本位置 */
+.design-project-text[data-project="7"] {
+    top: 6236.96px; /* 与第七个容器对齐 */
+}
+
+/* 设计项目标题样式 */
+.design-project-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 48px; /* 与其他详情页标题一致 */
+    font-weight: 200;
+    color: var(--color-pure-black);
+    line-height: 1.2;
+    margin: 0 0 20px 0;
+}
+
+/* 设计项目描述样式 */
+.design-project-description {
+    font-family: 'Courier Prime', monospace;
+    font-size: 16px; /* 与其他详情页描述一致 */
+    color: var(--color-pure-black);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Portfolio容器样式 */
+.design-portfolio-container {
+    background: var(--color-off-white);
+    overflow: hidden;
+}
+
+/* Portfolio图片样式 */
+.design-portfolio-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+/* 设计项目图片容器 - 支持多图层叠 */
+.design-project-images {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+/* 设计详情页白色打字机动画 */
+.design-typewriter {
+    color: var(--color-pure-white);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-family: 'Courier Prime', monospace;
+    overflow: hidden;
+    white-space: nowrap;
+    z-index: 50; /* 确保在其他元素之上 */
+}
+
+.design-typewriter-text {
+    display: inline-block;
+    border-right: 2px solid var(--color-pure-white);
+    animation: blink-white 1s infinite;
+}
+
+/* 白色打字机专用闪烁动画 */
+@keyframes blink-white {
+    0%, 50% { border-color: var(--color-pure-white); }
+    51%, 100% { border-color: transparent; }
+}
+
+/* 设计项目图片样式 - 绝对定位层叠 */
+.design-project-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transition: transform 430ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    z-index: 10; /* 默认层级 */
+}
+
+/* 图片层级设置 - 第一张图片在最上层 */
+.design-project-img[data-layer="0"] { z-index: 40; }
+.design-project-img[data-layer="1"] { z-index: 39; }
+.design-project-img[data-layer="2"] { z-index: 38; }
+.design-project-img[data-layer="3"] { z-index: 37; }
+
+/* 悬停时的屏风展开动画 - 根据项目图片数量调整 */
+
+/* 项目1 (OkeyBakery) - 3张图片，每张露出150px */
+.design-container[data-index="0"]:hover .design-project-img[data-layer="0"] {
+    transform: translateX(300px); /* 最上层(okey01)移动最多，露出下面两张 */
+}
+.design-container[data-index="0"]:hover .design-project-img[data-layer="1"] {
+    transform: translateX(150px); /* 中间层(okey02)移动中等，露出最下层 */
+}
+.design-container[data-index="0"]:hover .design-project-img[data-layer="2"] {
+    transform: translateX(0px); /* 最下层(okey03)不移动，作为底层被露出 */
+}
+
+/* 项目2 (Jia Tong Xing) - 3张图片，每张露出150px */
+.design-container[data-index="1"]:hover .design-project-img[data-layer="0"] {
+    transform: translateX(300px); /* 最上层移动最多，露出下面两张 */
+}
+.design-container[data-index="1"]:hover .design-project-img[data-layer="1"] {
+    transform: translateX(150px); /* 中间层移动中等，露出最下层 */
+}
+.design-container[data-index="1"]:hover .design-project-img[data-layer="2"] {
+    transform: translateX(0px); /* 最下层不移动，作为底层被露出 */
+}
+
+/* 项目3 (MOBAI Tea) - 4张图片，每张露出150px */
+.design-container[data-index="2"]:hover .design-project-img[data-layer="0"] {
+    transform: translateX(450px); /* 最上层移动最多，露出下面三张 */
+}
+.design-container[data-index="2"]:hover .design-project-img[data-layer="1"] {
+    transform: translateX(300px); /* 第二层移动300px，露出下面两张 */
+}
+.design-container[data-index="2"]:hover .design-project-img[data-layer="2"] {
+    transform: translateX(150px); /* 第三层移动150px，露出最下层 */
+}
+.design-container[data-index="2"]:hover .design-project-img[data-layer="3"] {
+    transform: translateX(0px); /* 最下层不移动，作为底层被露出 */
+}
+
+/* 项目4 (Tu'er Yeah) - 3张图片，每张露出150px */
+.design-container[data-index="3"]:hover .design-project-img[data-layer="0"] {
+    transform: translateX(300px); /* 最上层移动最多，露出下面两张 */
+}
+.design-container[data-index="3"]:hover .design-project-img[data-layer="1"] {
+    transform: translateX(150px); /* 中间层移动中等，露出最下层 */
+}
+.design-container[data-index="3"]:hover .design-project-img[data-layer="2"] {
+    transform: translateX(0px); /* 最下层不移动，作为底层被露出 */
+}
+
+/* 项目5 (Oak Tree) - 3张图片，每张露出150px */
+.design-container[data-index="4"]:hover .design-project-img[data-layer="0"] {
+    transform: translateX(300px); /* 最上层移动最多，露出下面两张 */
+}
+.design-container[data-index="4"]:hover .design-project-img[data-layer="1"] {
+    transform: translateX(150px); /* 中间层移动中等，露出最下层 */
+}
+.design-container[data-index="4"]:hover .design-project-img[data-layer="2"] {
+    transform: translateX(0px); /* 最下层不移动，作为底层被露出 */
+}
+
+/* 项目6 (New Wave) - 1张图片，无动画 */
+/* 单张图片项目不需要悬停动画 */
+
+/* 项目7 (Posters) - 2张图片，每张露出150px */
+.design-container[data-index="6"]:hover .design-project-img[data-layer="0"] {
+    transform: translateX(150px); /* 最上层移动150px，露出最下层 */
+}
+.design-container[data-index="6"]:hover .design-project-img[data-layer="1"] {
+    transform: translateX(0px); /* 最下层不移动，作为底层被露出 */
+}
+
+/* 摄影页面 (第4页) - 专门布局 */
+.page[data-page="4"] {
+    height: 1119px; /* 919 + 200px 延展内容 */
+    overflow: hidden;
+}
+
+.page[data-page="4"] .page-title {
+    position: absolute;
+    left: 20px; /* 网格边距 */
+    top: 160px; /* 调整到合适位置 */
+    font-family: 'Noto Serif SC', serif;
+    font-size: 48px;
+    font-weight: 200;
+    color: var(--color-pure-black);
+    line-height: 1.2;
+    margin: 0;
+    max-width: 800px;
+}
+
+/* 右侧像素画容器 - 正方形容器 */
+.photography-pixel-container {
+    position: absolute;
+    right: 1px; /* 右边界：1470 - 1 = 1469px */
+    top: 40px;
+    width: 878px; /* 正方形尺寸：918 - 40 = 878px */
+    height: 878px; /* 正方形尺寸 */
+    background: transparent; /* 透明背景 */
+    overflow: hidden;
+}
+
+/* 像素画网格 */
+.pixel-art-grid {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(48, 1fr);
+    grid-template-rows: repeat(48, 1fr);
+    gap: 0; /* 无间隙，让像素紧密排列 */
+    padding: 0;
+}
+
+/* 像素点样式 */
+.pixel-dot {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+/* 透明像素（背景） */
+.pixel-transparent {
+    background: transparent;
+}
+
+/* 10种颜色 */
+.pixel-c0 { background: #152e3f; }
+.pixel-c1 { background: #0057a5; }
+.pixel-c2 { background: #5a7183; }
+.pixel-c3 { background: #3398fe; }
+.pixel-c4 { background: #888687; }
+.pixel-c5 { background: #61aefd; }
+.pixel-c6 { background: #aeb4c6; }
+.pixel-c7 { background: #9ec2e8; }
+.pixel-c8 { background: #fafafa; }
+.pixel-c9 { background: #fefffe; }
+
+
+/* 左侧下半部分滚动容器 */
+.photography-contact-container {
+    position: absolute;
+    left: 0;
+    top: 459px; /* 下半部分开始：(918 / 2) + 40 = 459px */
+    width: 590px; /* 左侧剩余宽度：1470 - 878 - 1 - 1 = 590px */
+    height: 459px; /* 下半部分高度：918 - 459 = 459px */
+    background: transparent; /* 移除背景，只显示文本 */
+    overflow: hidden;
+}
+
+/* 可滚动内容区域 - 包含延展部分 */
+.photography-contact-scroll {
+    position: relative;
+    width: 100%;
+    height: 918px; /* 只包含正常页面内容，不包含延展 */
+    transition: transform 0.3s ease-out;
+}
+
+/* 联系信息部分 */
+.photography-contact-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 918px; /* 原始内容高度 */
+    padding: 40px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around; /* 4组文本均匀分布 */
+}
+
+/* 延展内容部分 - 位于摄影页面内部底部 */
+.photography-extended-content {
+    position: absolute;
+    top: 918px; /* 在正常页面内容下方 */
+    left: 0;
+    width: 1470px; /* 整个页面宽度 */
+    height: 200px; /* 延展高度 */
+    background: var(--color-primary-blue); /* 主要蓝色背景 */
+    display: flex;
+    align-items: center; /* 上下居中 */
+    padding-left: 20px; /* 与标题对齐 */
+    box-sizing: border-box;
+}
+
+/* 延展内容文字 */
+.extended-greeting {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 48px;
+    font-weight: 200;
+    color: var(--color-pure-white); /* 白色文字配蓝色背景 */
+    line-height: 1.2;
+    margin: 0;
+}
+
+/* 联系信息组样式 */
+.contact-group {
+    text-align: left;
+}
+
+.contact-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 24px;
+    font-weight: 200;
+    color: var(--color-pure-black);
+    margin: 0 0 5px 0; /* 标题和正文紧密相连 */
+}
+
+.contact-text {
+    font-family: 'Courier Prime', monospace;
+    font-size: 16px;
+    color: var(--color-pure-black);
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* 摄影页面专用标题样式覆盖 */
+.page[data-page="4"] .contact-title,
+.page[data-page="4"] .extended-greeting {
+    font-family: 'Noto Serif SC', serif !important;
+    font-weight: 200 !important;
+}
+
+/* 响应式提示：专注MacBook 14英寸开发，不做缩放 */
+@media (max-width: 1470px) or (max-height: 919px) {
+    /* 固定尺寸，不缩放 */
+}

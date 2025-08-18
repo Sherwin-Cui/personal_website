@@ -6,18 +6,13 @@
     <title>Portfolio - Sherwin</title>
     
     <!-- CSS 模块 -->
-    <link rel="stylesheet" href="css/variables.css">
-    <link rel="stylesheet" href="css/fonts.css">
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/navigation.css">
     <link rel="stylesheet" href="css/animations.css">
     <link rel="stylesheet" href="css/hero.css">
-    <link rel="stylesheet" href="css/content.css">
     <link rel="stylesheet" href="css/video.css">
-    <link rel="stylesheet" href="css/pixel-art.css">
-    <link rel="stylesheet" href="css/page-snap.css"> <!-- 新的页面吸附样式 -->
+    <link rel="stylesheet" href="css/pages.css">
     <link rel="stylesheet" href="css/grid-system.css">
-    <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
     <!-- 导航栏 -->
@@ -113,144 +108,698 @@
         </video>
     </div>
 
-    <!-- 主内容区域 -->
-    <main class="main-content" id="mainContent">
-        <!-- 内容顶部手柄 -->
-        <div class="content-handle"></div>
-        
-        <div class="content-inner">
-            <!-- 页面 01: Green Apple's Thousand and One Nights -->
-            <section class="content-section">
-                <div class="section-container">
-                    <!-- 页面编号 -->
-                    <span class="section-number">01</span>
-                    
-                    <!-- 主要内容网格 -->
-                    <div class="feature-grid">
-                        <!-- 左侧文本区域 -->
-                        <div class="feature-text">
-                            <h2 class="feature-title" 
-                                data-en="Green Apple's Thousand and One Nights" 
-                                data-zh="苹果的一千零一夜">
-                                Green Apple's Thousand and One Nights
-                            </h2>
-                            <div class="feature-description" 
-                                 data-en="Italian designer Pietro Fornasseti's classic series, &quot;Theme and Variations,&quot; is a thousand plates with similar themes yet vastly different designs. You may not have heard of the work, but yes, I stole his idea. I plan to continue creating works based on Apple themes until I complete a collection of 1,000 stamps." 
-                                 data-zh="意大利设计师Pietro Fornasseti经典的系列作品《主旋律与变奏曲》，是一千个异曲同工但又大相径庭的盘子。尽管你很可能没有听说过该作品，但是，是的，我剽窃了他的创意。我打算以苹果为主题创作，直到完成1000幅的集邮。">
-                                Italian designer Pietro Fornasseti's classic series, &quot;Theme and Variations,&quot; is a thousand plates with similar themes yet vastly different designs. You may not have heard of the work, but yes, I stole his idea. I plan to continue creating works based on Apple themes until I complete a collection of 1,000 stamps.
-                            </div>
-                        </div>
-                        
-                        <!-- 右侧视觉区域 -->
-                        <div class="feature-visual">
-                            <div class="visual-placeholder">
-                                <span data-en="Coming Soon" data-zh="即将上线">Coming Soon</span>
-                            </div>
-                        </div>
-                    </div>
+    
+    <!-- 页面系统 -->
+    <main class="page-container" id="pageContainer">
+        <div class="page-inner" id="pageInner">
+            <!-- 第1页：苹果作品 -->
+            <section class="page" data-page="1">
+                <!-- 横线动画 - 纵坐标500px位置 -->
+                <div class="apple-lines-animation">
+                    <!-- 横向线条 -->
+                    <div class="animation-line horizontal-line h1"></div>
+                    <div class="animation-line horizontal-line h2"></div>
+                    <!-- 闪烁点 -->
+                    <div class="flash flash1"></div>
+                    <div class="flash flash2"></div>
+                    <div class="flash flash3"></div>
+                    <div class="flash flash4"></div>
+                    <div class="flash flash5"></div>
                 </div>
-            </section>
-            
-            <!-- 页面 02: AI Coding -->
-            <section class="content-section">
-                <div class="section-container">
-                    <!-- 页面编号 -->
-                    <span class="section-number">02</span>
-                    
-                    <!-- 主要内容网格 -->
-                    <div class="feature-grid">
-                        <!-- 左侧文本区域 -->
-                        <div class="feature-text">
-                            <h2 class="feature-title" 
-                                data-en="AI Coding" 
-                                data-zh="AI Coding">
-                                AI Coding
-                            </h2>
-                            <div class="feature-description" 
-                                 data-en="For me, the greatest significance of AI as a productivity tool is that it allows tech-savvy individuals to materialize their ideas with minimal learning curve. In just two or three years, you can create at a pace and pace you enjoy. It&apos;s truly remarkable what a new era we&apos;re living in." 
-                                 data-zh="对于我来说，AI作为生产力的最大意义，就是可以让技术懒汉们以最低的学习成本实体化自己的想法。短短的两三年，就可以用享受的节奏和方式进行创作，不得不让人感叹我们在经历一个时代。">
-                                For me, the greatest significance of AI as a productivity tool is that it allows tech-savvy individuals to materialize their ideas with minimal learning curve. In just two or three years, you can create at a pace and pace you enjoy. It&apos;s truly remarkable what a new era we&apos;re living in.
-                            </div>
-                        </div>
-                        
-                        <!-- 右侧视觉区域 -->
-                        <div class="feature-visual">
-                            <div class="visual-placeholder">
-                                <span data-en="Coming Soon" data-zh="即将上线">Coming Soon</span>
-                            </div>
-                        </div>
+                <div class="page-content">
+                    <div class="content-left">
+                        <h2 class="page-title" 
+                            data-en="Green Apple's Thousand and One Nights" 
+                            data-zh="苹果的一千零一夜">
+                            Green Apple's Thousand and One Nights
+                        </h2>
+                        <p class="page-description" 
+                           data-en="Italian designer Pietro Fornasseti's classic series, &quot;Theme and Variations,&quot; is a thousand plates with similar themes yet vastly different designs. You may not have heard of the work, but yes, I stole his idea. I plan to continue creating works based on Apple themes until I complete a collection of 1,000 stamps." 
+                           data-zh="意大利设计师Pietro Fornasseti经典的系列作品《主旋律与变奏曲》，是一千个异曲同工但又大相径庭的盘子。尽管你很可能没有听说过该作品，但是，是的，我剽窃了他的创意。我打算以苹果为主题创作，直到完成1000幅的集邮。">
+                            Italian designer Pietro Fornasseti's classic series, "Theme and Variations," is a thousand plates with similar themes yet vastly different designs. You may not have heard of the work, but yes, I stole his idea. I plan to continue creating works based on Apple themes until I complete a collection of 1,000 stamps.
+                        </p>
                     </div>
-                </div>
-            </section>
-            
-            <!-- 页面 03: Graphic Design Works -->
-            <section class="content-section">
-                <div class="section-container">
-                    <!-- 页面编号 -->
-                    <span class="section-number">03</span>
-                    
-                    <!-- 主要内容网格 -->
-                    <div class="feature-grid">
-                        <!-- 左侧文本区域 -->
-                        <div class="feature-text">
-                            <h2 class="feature-title" 
-                                data-en="Graphic design works" 
-                                data-zh="平面设计">
-                                Graphic design works
-                            </h2>
-                            <div class="feature-description" 
-                                 data-en="Welcome to some graphic design work. Sherwin no longer works as a graphic designer, so graphic design has become interesting, just as it was when I first decided to pursue this field. The world needs graphic design to become relevant again!" 
-                                 data-zh="欢迎收看一些平面设计的作品。Sherwin已经不怎么作为一个平面设计师工作了，所以平面设计变得有趣了起来，正如我当初决定接触到这个领域一样。世界需要让平面设计再次变得重要！">
-                                Welcome to some graphic design work. Sherwin no longer works as a graphic designer, so graphic design has become interesting, just as it was when I first decided to pursue this field. The world needs graphic design to become relevant again!
-                            </div>
-                        </div>
-                        
-                        <!-- 右侧视觉区域 - 包含像素艺术 -->
-                        <div class="feature-visual">
-                            <div class="pixel-art-container">
-                                <div class="canvas-wrapper">
-                                    <div id="pixelGrid"></div>
+                    <div class="content-right">
+                        <div class="visual-area">
+                            <!-- 蓝色背景 -->
+                            <div class="apple-interaction-background"></div>
+                            <!-- 图片 -->
+                            <img src="assets/apple/015.png" alt="Green Apple Pixel Art" class="apple-image">
+                            <!-- 交互元素 -->
+                            <div class="apple-interaction-text" data-en="click for details" data-zh="点击以浏览">click for details</div>
+                            <div class="apple-interaction-arrow">
+                                <div class="arrow-animation">
+                                    <div class="arrow-wrapper">
+                                        <div class="arrow">
+                                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M12 2 L12 22 M0 14 L12 22 L24 14" 
+                                                      stroke="white" 
+                                                      stroke-width="1" 
+                                                      stroke-linecap="round" 
+                                                      stroke-linejoin="round"/>
+                                            </svg>
+                                        </div>
+                                        <div class="arrow">
+                                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M12 2 L12 22 M0 14 L12 22 L24 14" 
+                                                      stroke="white" 
+                                                      stroke-width="1" 
+                                                      stroke-linecap="round" 
+                                                      stroke-linejoin="round"/>
+                                            </svg>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
-            
-            <!-- 页面 04: Photography -->
-            <section class="content-section">
-                <div class="section-container">
-                    <!-- 页面编号 -->
-                    <span class="section-number">04</span>
+
+            <!-- 第2页：AI编程 -->
+            <section class="page" data-page="2">
+                <!-- 线条动画 - 横线（无旋转） -->
+                <div class="page-lines-animation">
+                    <!-- 横向线条 -->
+                    <div class="animation-line horizontal-line h1"></div>
+                    <div class="animation-line horizontal-line h2"></div>
+                    <!-- 闪烁点 -->
+                    <div class="flash flash1"></div>
+                    <div class="flash flash2"></div>
+                    <div class="flash flash3"></div>
+                    <div class="flash flash4"></div>
+                    <div class="flash flash5"></div>
+                </div>
+                <div class="page-content">
+                    <h2 class="page-title" 
+                        data-en="AI Coding" 
+                        data-zh="AI Coding">
+                        AI Coding
+                    </h2>
+                    <p class="page-description" 
+                       data-en="For me, the greatest significance of AI as a productivity tool is that it allows tech-savvy individuals to materialize their ideas with minimal learning curve. In just two or three years, you can create at a pace and pace you enjoy. It&apos;s truly remarkable what a new era we&apos;re living in." 
+                       data-zh="对于我来说，AI作为生产力的最大意义，就是可以让技术懒汉们以最低的学习成本实体化自己的想法。短短的两三年，就可以用享受的节奏和方式进行创作，不得不让人感叹我们在经历一个时代。">
+                        For me, the greatest significance of AI as a productivity tool is that it allows tech-savvy individuals to materialize their ideas with minimal learning curve. In just two or three years, you can create at a pace and pace you enjoy. It's truly remarkable what a new era we're living in.
+                    </p>
                     
-                    <!-- 主要内容网格 -->
-                    <div class="feature-grid">
-                        <!-- 左侧文本区域 -->
-                        <div class="feature-text">
-                            <h2 class="feature-title" 
-                                data-en="Photography" 
-                                data-zh="摄影">
-                                Photography
-                            </h2>
-                            <div class="feature-description" 
-                                 data-en="Now that AI can indistinguish the real from the fake, has the significance of photography been diminished? AIGC, while accompanied by randomness, cannot replace the changes and specific states recorded by the camera shutter. The objective reality behind the lens is something AI cannot simulate." 
-                                 data-zh="既然AI已经可以以假乱真，摄影的意义是否遭到了削减？AIGC伴随着随机性，却不能代替相机快门记录下的变化和特定状态。镜头下是AI无法模拟的客观。">
-                                Now that AI can indistinguish the real from the fake, has the significance of photography been diminished? AIGC, while accompanied by randomness, cannot replace the changes and specific states recorded by the camera shutter. The objective reality behind the lens is something AI cannot simulate.
+                    <div class="visual-area">
+                        <!-- 蓝色背景 -->
+                        <div class="ai-interaction-background"></div>
+                        
+                        <!-- 交互文字 -->
+                        <div class="ai-interaction-text" data-en="click to view more" data-zh="点击查看更多">click to view more</div>
+                        
+                        <!-- 交互箭头 -->
+                        <div class="ai-interaction-arrow">
+                            <div class="arrow-animation">
+                                <div class="arrow-wrapper">
+                                    <div class="arrow">
+                                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M12 2 L12 22 M0 14 L12 22 L24 14" 
+                                                  stroke="white" 
+                                                  stroke-width="1" 
+                                                  stroke-linecap="round" 
+                                                  stroke-linejoin="round"/>
+                                        </svg>
+                                    </div>
+                                    <div class="arrow">
+                                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M12 2 L12 22 M0 14 L12 22 L24 14" 
+                                                  stroke="white" 
+                                                  stroke-width="1" 
+                                                  stroke-linecap="round" 
+                                                  stroke-linejoin="round"/>
+                                        </svg>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         
-                        <!-- 右侧视觉区域 -->
-                        <div class="feature-visual">
-                            <div class="visual-placeholder">
-                                <span data-en="Coming Soon" data-zh="即将上线">Coming Soon</span>
+                        <!-- iframe预览 -->
+                        <iframe src="https://ai-detective-demo.vercel.app/" 
+                                class="ai-iframe"
+                                loading="lazy"
+                                title="AI Detective Demo"
+                                sandbox="allow-scripts allow-same-origin">
+                        </iframe>
+                        
+                        <!-- fallback内容（iframe加载失败时显示） -->
+                        <div class="ai-fallback">
+                            <span data-en="AI Detective Demo Preview" data-zh="AI侦探演示预览">AI Detective Demo Preview</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 第3页：平面设计 -->
+            <section class="page" data-page="3">
+                <!-- 线条动画 - 直线（无旋转） -->
+                <div class="page-lines-animation">
+                    <!-- 纵向线条 -->
+                    <div class="animation-line vertical-line v1"></div>
+                    <div class="animation-line vertical-line v2"></div>
+                    <!-- 闪烁点 -->
+                    <div class="flash flash1"></div>
+                    <div class="flash flash2"></div>
+                    <div class="flash flash3"></div>
+                    <div class="flash flash4"></div>
+                    <div class="flash flash5"></div>
+                </div>
+                <div class="page-content">
+                    <div class="content-left">
+                        <h2 class="page-title" 
+                            data-en="Graphic design works" 
+                            data-zh="平面设计">
+                            Graphic design works
+                        </h2>
+                        <p class="page-description" 
+                           data-en="Welcome to some graphic design work. Sherwin no longer works as a graphic designer, so graphic design has become interesting, just as it was when I first decided to pursue this field. The world needs graphic design to become relevant again!" 
+                           data-zh="欢迎收看一些平面设计的作品。Sherwin已经不怎么作为一个平面设计师工作了，所以平面设计变得有趣了起来，正如我当初决定接触到这个领域一样。世界需要让平面设计再次变得重要！">
+                            Welcome to some graphic design work. Sherwin no longer works as a graphic designer, so graphic design has become interesting, just as it was when I first decided to pursue this field. The world needs graphic design to become relevant again!
+                        </p>
+                    </div>
+                    <div class="content-right">
+                        <div class="visual-area design-video-carousel">
+                            <!-- 蓝色背景 -->
+                            <div class="design-interaction-background"></div>
+                            
+                            <!-- 交互文字 -->
+                            <div class="design-interaction-text" data-en="click for details" data-zh="点击查看详情">click for details</div>
+                            
+                            <!-- 交互箭头 -->
+                            <div class="design-interaction-arrow">
+                                <div class="arrow-animation">
+                                    <div class="arrow-wrapper">
+                                        <div class="arrow">
+                                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M12 2 L12 22 M0 14 L12 22 L24 14" 
+                                                      stroke="white" 
+                                                      stroke-width="1" 
+                                                      stroke-linecap="round" 
+                                                      stroke-linejoin="round"/>
+                                            </svg>
+                                        </div>
+                                        <div class="arrow">
+                                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M12 2 L12 22 M0 14 L12 22 L24 14" 
+                                                      stroke="white" 
+                                                      stroke-width="1" 
+                                                      stroke-linecap="round" 
+                                                      stroke-linejoin="round"/>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- 视频轮播 -->
+                            <div class="design-videos-container">
+                                <video class="design-video active" autoplay muted loop>
+                                    <source src="assets/design/dynamic_posters/01.mp4" type="video/mp4">
+                                </video>
+                                <video class="design-video" autoplay muted loop>
+                                    <source src="assets/design/dynamic_posters/02.mp4" type="video/mp4">
+                                </video>
+                                <video class="design-video" autoplay muted loop>
+                                    <source src="assets/design/dynamic_posters/03.mp4" type="video/mp4">
+                                </video>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
+
+            <!-- 第4页：摄影 -->
+            <section class="page" data-page="4">
+                <!-- 线条动画 - 横线（无旋转） -->
+                <div class="page-lines-animation">
+                    <!-- 横向线条 -->
+                    <div class="animation-line horizontal-line h1"></div>
+                    <div class="animation-line horizontal-line h2"></div>
+                    <!-- 闪烁点 -->
+                    <div class="flash flash1"></div>
+                    <div class="flash flash2"></div>
+                    <div class="flash flash3"></div>
+                    <div class="flash flash4"></div>
+                    <div class="flash flash5"></div>
+                </div>
+                <div class="page-content">
+                    <!-- 标题 -->
+                    <h2 class="page-title" 
+                        data-en="Contact Me" 
+                        data-zh="联系我">
+                        Contact Me
+                    </h2>
+                    
+                    <!-- 右侧像素画容器 - 正方形(1469-40=878px) -->
+                    <div class="photography-pixel-container">
+                        <!-- 直接嵌入的48x48像素画 -->
+                        <div class="pixel-art-grid" id="pixelArtGrid"></div>
+                    </div>
+                    
+                    <!-- 左侧下半部分滚动容器 -->
+                    <div class="photography-contact-container">
+                        <div class="photography-contact-scroll">
+                            <!-- 联系信息部分 -->
+                            <div class="photography-contact-content">
+                                <div class="contact-group">
+                                    <h3 class="contact-title" data-en="WeChat" data-zh="微信">WeChat</h3>
+                                    <p class="contact-text">EduardodeVinci</p>
+                                </div>
+                                <div class="contact-group">
+                                    <h3 class="contact-title" data-en="Email" data-zh="邮箱">Email</h3>
+                                    <p class="contact-text">giovannicui1874@163.com</p>
+                                </div>
+                                <div class="contact-group">
+                                    <h3 class="contact-title" data-en="Phone Number" data-zh="手机">Phone Number</h3>
+                                    <p class="contact-text">（+86）15518216455</p>
+                                </div>
+                                <div class="contact-group">
+                                    <h3 class="contact-title" data-en="GitHub" data-zh="GitHub">GitHub</h3>
+                                    <p class="contact-text">https://github.com/Sherwin-Cui</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 摄影页面延展内容 - 在页面section内部 -->
+                <div class="photography-extended-content">
+                    <h2 class="extended-greeting" 
+                        data-en="Hey, It's Sherwin" 
+                        data-zh="你好，我是崔植树">Hey, It's Sherwin</h2>
+                </div>
+            </section>
         </div>
     </main>
 
+    <!-- 苹果详情页面 -->
+    <div class="apple-detail-page" id="appleDetailPage">
+        <div class="detail-page-content">
+            <!-- 返回按钮 -->
+            <div class="back-button" id="backButton">
+                <div class="back-arrow">
+                    <div class="back-arrow-wrapper">
+                        <div class="back-arrow-item">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2 L12 22 M0 14 L12 22 L24 14" 
+                                      stroke="black" 
+                                      stroke-width="1" 
+                                      stroke-linecap="round" 
+                                      stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div class="back-arrow-item">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2 L12 22 M0 14 L12 22 L24 14" 
+                                      stroke="black" 
+                                      stroke-width="1" 
+                                      stroke-linecap="round" 
+                                      stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <span class="back-text" data-en="back" data-zh="返回">back</span>
+            </div>
+            
+            <!-- 详情页内容 -->
+            <div class="detail-content">
+                <h1 class="detail-title" 
+                    data-en="Green Apple's Thousand and One Nights" 
+                    data-zh="苹果的一千零一夜">
+                    Green Apple's Thousand and One Nights
+                </h1>
+                <p class="detail-description" 
+                   data-en="Italian designer Pietro Fornasseti's classic series, &quot;Theme and Variations,&quot; is a thousand plates with similar themes yet vastly different designs. You may not have heard of the work, but yes, I stole his idea. I plan to continue creating works based on Apple themes until I complete a collection of 1,000 stamps." 
+                   data-zh="意大利设计师Pietro Fornasseti经典的系列作品《主旋律与变奏曲》，是一千个异曲同工但又大相径庭的盘子。尽管你很可能没有听说过该作品，但是，是的，我剽窃了他的创意。我打算以苹果为主题创作，直到完成1000幅的集邮。">
+                    Italian designer Pietro Fornasseti's classic series, "Theme and Variations," is a thousand plates with similar themes yet vastly different designs. You may not have heard of the work, but yes, I stole his idea. I plan to continue creating works based on Apple themes until I complete a collection of 1,000 stamps.
+                </p>
+            </div>
+            
+            <!-- 苹果图片容器 - 15个绝对定位正方形容器，容器间间距100px -->
+            <!-- 计算公式：第 n+1 个 = 第 n 个 top + 容器高度(719px) + 间距(100px) -->
+            <div class="apple-container" data-index="0" style="position: absolute; left: 750px; top: 336px; width: 719px; height: 719px;">
+                <img src="assets/apple/001.png" alt="Apple 001" class="apple-detail-img">
+            </div>
+            <div class="apple-container" data-index="1" style="position: absolute; left: 750px; top: 1155px; width: 719px; height: 719px;">
+                <img src="assets/apple/002.png" alt="Apple 002" class="apple-detail-img">
+            </div>
+            <div class="apple-container" data-index="2" style="position: absolute; left: 750px; top: 1974px; width: 719px; height: 719px;">
+                <img src="assets/apple/003.jpg" alt="Apple 003" class="apple-detail-img">
+            </div>
+            <div class="apple-container" data-index="3" style="position: absolute; left: 750px; top: 2793px; width: 719px; height: 719px;">
+                <img src="assets/apple/005.png" alt="Apple 005" class="apple-detail-img">
+            </div>
+            <div class="apple-container" data-index="4" style="position: absolute; left: 750px; top: 3612px; width: 719px; height: 719px;">
+                <img src="assets/apple/006.png" alt="Apple 006" class="apple-detail-img">
+            </div>
+            <div class="apple-container" data-index="5" style="position: absolute; left: 750px; top: 4431px; width: 719px; height: 719px;">
+                <img src="assets/apple/007.png" alt="Apple 007" class="apple-detail-img">
+            </div>
+            <div class="apple-container" data-index="6" style="position: absolute; left: 750px; top: 5250px; width: 719px; height: 719px;">
+                <img src="assets/apple/008.png" alt="Apple 008" class="apple-detail-img">
+            </div>
+            <div class="apple-container" data-index="7" style="position: absolute; left: 750px; top: 6069px; width: 719px; height: 719px;">
+                <img src="assets/apple/009.png" alt="Apple 009" class="apple-detail-img">
+            </div>
+            <div class="apple-container" data-index="8" style="position: absolute; left: 750px; top: 6888px; width: 719px; height: 719px;">
+                <img src="assets/apple/010.png" alt="Apple 010" class="apple-detail-img">
+            </div>
+            <div class="apple-container" data-index="9" style="position: absolute; left: 750px; top: 7707px; width: 719px; height: 719px;">
+                <img src="assets/apple/012.png" alt="Apple 012" class="apple-detail-img">
+            </div>
+            <div class="apple-container" data-index="10" style="position: absolute; left: 750px; top: 8526px; width: 719px; height: 719px;">
+                <img src="assets/apple/013.png" alt="Apple 013" class="apple-detail-img">
+            </div>
+            <div class="apple-container" data-index="11" style="position: absolute; left: 750px; top: 9345px; width: 719px; height: 719px;">
+                <img src="assets/apple/014.png" alt="Apple 014" class="apple-detail-img">
+            </div>
+            <div class="apple-container" data-index="12" style="position: absolute; left: 750px; top: 10164px; width: 719px; height: 719px;">
+                <img src="assets/apple/015.png" alt="Apple 015" class="apple-detail-img">
+            </div>
+            <div class="apple-container" data-index="13" style="position: absolute; left: 750px; top: 10983px; width: 719px; height: 719px;">
+                <img src="assets/apple/017.png" alt="Apple 017" class="apple-detail-img">
+            </div>
+            <div class="apple-container" data-index="14" style="position: absolute; left: 750px; top: 11802px; width: 719px; height: 719px;">
+                <img src="assets/apple/018.png" alt="Apple 018" class="apple-detail-img">
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Coding详情页面 -->
+    <div class="ai-detail-page" id="aiDetailPage">
+        <div class="detail-page-content">
+            <!-- 返回按钮 -->
+            <div class="back-button" id="aiBackButton">
+                <div class="back-arrow">
+                    <div class="back-arrow-wrapper">
+                        <div class="back-arrow-item">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2 L12 22 M0 14 L12 22 L24 14" 
+                                      stroke="black" 
+                                      stroke-width="1" 
+                                      stroke-linecap="round" 
+                                      stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div class="back-arrow-item">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2 L12 22 M0 14 L12 22 L24 14" 
+                                      stroke="black" 
+                                      stroke-width="1" 
+                                      stroke-linecap="round" 
+                                      stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <span class="back-text" data-en="back" data-zh="返回">back</span>
+            </div>
+            
+            <!-- 详情页内容已移除，使用项目专用文本 -->
+            
+            <!-- 容器1对应文本 -->
+            <div class="ai-project-text" data-project="1">
+                <h2 class="ai-project-title" 
+                    data-en="Destiny" 
+                    data-zh="Destiny">
+                    Destiny
+                </h2>
+                <h3 class="ai-project-subtitle" 
+                    data-en="Ai Tarot" 
+                    data-zh="AI塔罗牌占卜">
+                    Ai Tarot
+                </h3>
+                <p class="ai-project-description" 
+                   data-en="Built a prompt word framework, integrated it with a large language model, and returned divination results. Freely select the divination method and input questions. Includes a Tarot encyclopedia." 
+                   data-zh="构建提示词框架，接入大语言模型返回占卜结果。可自由选择占卜方式和输入问题。可查阅塔罗牌百科。">
+                    Built a prompt word framework, integrated it with a large language model, and returned divination results. Freely select the divination method and input questions. Includes a Tarot encyclopedia.
+                </p>
+            </div>
+            
+            <!-- 容器2对应文本 -->
+            <div class="ai-project-text" data-project="2">
+                <h2 class="ai-project-title" 
+                    data-en="Rainy Night Villa Mystery" 
+                    data-zh="雨夜山庄谜案">
+                    Rainy Night Villa Mystery
+                </h2>
+                <h3 class="ai-project-subtitle" 
+                    data-en="AI detective puzzle game" 
+                    data-zh="AI侦探解谜游戏">
+                    AI detective puzzle game
+                </h3>
+                <p class="ai-project-description" 
+                   data-en="Collect clues and deduce the truth through conversations with AI characters: During the investigation phase, obtain testimony clues through conversation. Obtain physical evidence through scene investigation. Combining clues obtained through investigation yields deduction clues. During the murderer identification phase, use key clues to reach the conclusion through dialogue." 
+                   data-zh="通过与AI角色对话收集线索，推理真相：在调查阶段，通过对话获取证词线索。通过场景调查获得物证；将调查获得线索组合获得推理线索；在指认凶手阶段，使用关键线索，通过对话形式达成结局。">
+                    Collect clues and deduce the truth through conversations with AI characters: During the investigation phase, obtain testimony clues through conversation. Obtain physical evidence through scene investigation. Combining clues obtained through investigation yields deduction clues. During the murderer identification phase, use key clues to reach the conclusion through dialogue.
+                </p>
+            </div>
+            
+            <!-- 容器3对应文本 -->
+            <div class="ai-project-text" data-project="3">
+                <h2 class="ai-project-title" 
+                    data-en="Three Kingdoms" 
+                    data-zh="三国风云-草船借箭">
+                    Three Kingdoms
+                </h2>
+                <h3 class="ai-project-subtitle" 
+                    data-en="AI Dialogue AVG" 
+                    data-zh="AI对话AVG">
+                    AI Dialogue AVG
+                </h3>
+                <p class="ai-project-description" 
+                   data-en="Play as Zhuge Liang and enter the Three Kingdoms period. You must avoid Zhou Yu's suspicion, issue a military order, persuade Lu Su to assist you, and ultimately obtain 100,000 arrows within three days. Use items to increase your success rate in event checks and improve your character's attributes." 
+                   data-zh="扮演诸葛亮，进入三国时期。你需要避免被周瑜猜忌，立下军令状，说服鲁肃为你提供帮助，最后成功在3天内得到十万支箭。使用道具来增加事件检定成功率、提升人物属性。">
+                    Play as Zhuge Liang and enter the Three Kingdoms period. You must avoid Zhou Yu's suspicion, issue a military order, persuade Lu Su to assist you, and ultimately obtain 100,000 arrows within three days. Use items to increase your success rate in event checks and improve your character's attributes.
+                </p>
+            </div>
+            
+            <!-- AI项目容器 - 3个矩形容器，尺寸1065×612.66px，容器间间距100px -->
+            <!-- 计算公式：第 n+1 个 = 第 n 个 top + 容器高度(612.66px) + 间距(100px) -->
+            <!-- 位置调整：left=405px使右边缘与页面边缘(1470px)重合：405+1065=1470 -->
+            <div class="ai-container" data-index="0" style="position: absolute; left: 405px; top: 336px; width: 1065px; height: 612.66px;">
+                <video class="ai-project-video" autoplay muted loop>
+                    <source src="assets/aicoding/塔罗-演示.mp4" type="video/mp4">
+                    <div class="ai-project-content">
+                        <span data-en="Video not supported" data-zh="视频不支持">Video not supported</span>
+                    </div>
+                </video>
+            </div>
+            <div class="ai-container" data-index="1" style="position: absolute; left: 405px; top: 1148.66px; width: 1065px; height: 612.66px;">
+                <iframe src="https://ai-detective-demo.vercel.app/" 
+                        class="ai-project-iframe"
+                        loading="lazy"
+                        title="AI Detective Demo"
+                        sandbox="allow-scripts allow-same-origin">
+                </iframe>
+                <div class="ai-project-fallback">
+                    <span data-en="AI Detective Demo Preview" data-zh="AI侦探演示预览">AI Detective Demo Preview</span>
+                </div>
+            </div>
+            <div class="ai-container" data-index="2" style="position: absolute; left: 405px; top: 1961.32px; width: 1065px; height: 612.66px;">
+                <iframe src="https://a-igame-03-9xkaqg863-sherwins-projects-1b5a10ea.vercel.app/" 
+                        class="ai-project-iframe"
+                        loading="lazy"
+                        title="AI Game Preview"
+                        sandbox="allow-scripts allow-same-origin">
+                </iframe>
+                <div class="ai-project-fallback">
+                    <span data-en="AI Game Preview" data-zh="AI游戏预览">AI Game Preview</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 平面设计详情页面 -->
+    <div class="design-detail-page" id="designDetailPage">
+        <div class="detail-page-content">
+            <!-- 返回按钮 -->
+            <div class="back-button" id="designBackButton">
+                <div class="back-arrow">
+                    <div class="back-arrow-wrapper">
+                        <div class="back-arrow-item">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2 L12 22 M0 14 L12 22 L24 14" 
+                                      stroke="black" 
+                                      stroke-width="1" 
+                                      stroke-linecap="round" 
+                                      stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div class="back-arrow-item">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2 L12 22 M0 14 L12 22 L24 14" 
+                                      stroke="black" 
+                                      stroke-width="1" 
+                                      stroke-linecap="round" 
+                                      stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <span class="back-text" data-en="back" data-zh="返回">back</span>
+            </div>
+            
+            <!-- 白色打字机动画 - 绝对定位在(1115, 633) -->
+            <div class="design-typewriter" style="position: absolute; left: 1115px; top: 633px;">
+                <span class="design-typewriter-text" id="designTypewriter"></span>
+            </div>
+            
+            <!-- Portfolio展示容器 - 填满屏幕宽度 -->
+            <div class="design-portfolio-container" style="position: absolute; left: 0px; top: 336px; width: 1470px; height: 825px;">
+                <img src="assets/design/portfolio.png" alt="Design Portfolio" class="design-portfolio-img">
+            </div>
+            
+            <!-- 容器1对应文本 -->
+            <div class="design-project-text" data-project="1">
+                <h2 class="design-project-title" 
+                    data-en="OkeyBakery brand design" 
+                    data-zh="OkeyBakery 品牌形象设计">
+                    OkeyBakery brand design
+                </h2>
+                <p class="design-project-description" 
+                   data-en="The visual identity system for the OKEY BAKERY bread brand, centered around the symbol &quot;OK,&quot; conveys the brand's focus on Mediterranean baking culture through a flexible and adaptable graphic system." 
+                   data-zh="OKEY BAKERY面包烘焙品牌的视觉识别系统，以&quot;OK&quot;为核心符号，通过灵活可变的图形系统传递品牌所专注的地中海烘焙文化。">
+                    The visual identity system for the OKEY BAKERY bread brand, centered around the symbol "OK," conveys the brand's focus on Mediterranean baking culture through a flexible and adaptable graphic system.
+                </p>
+            </div>
+            
+            <!-- 容器2对应文本 -->
+            <div class="design-project-text" data-project="2">
+                <h2 class="design-project-title" 
+                    data-en="Jia Tong Xing" 
+                    data-zh="家同兴">
+                    Jia Tong Xing
+                </h2>
+                <p class="design-project-description" 
+                   data-en="The brand identity designed for the Jia Tong Xing family mutual aid platform. The incorporation of seal script, traditional colors, and cultural DNA expresses the family's aspiration of &quot;a prosperous life.&quot;" 
+                   data-zh="为家同兴家庭互助平台设计的品牌形象。篆书、传统色彩和文化基因的植入，表达&quot;钟鸣鼎食&quot;的家族愿景寄托。">
+                    The brand identity designed for the Jia Tong Xing family mutual aid platform. The incorporation of seal script, traditional colors, and cultural DNA expresses the family's aspiration of "a prosperous life."
+                </p>
+            </div>
+            
+            <!-- 容器3对应文本 -->
+            <div class="design-project-text" data-project="3">
+                <h2 class="design-project-title" 
+                    data-en="MOBAI Tea" 
+                    data-zh="墨白茶">
+                    MOBAI Tea
+                </h2>
+                <p class="design-project-description" 
+                   data-en="Treating white as black, using white as ink. This is how calligraphers and painters understand space and structure. Therefore, the fusion of black and white may express the Zen spirit of tea packaging design." 
+                   data-zh="计白当黑、以白为墨。这是书画家们对空间和结构的理解。因此，黑与白的融合或能表达茶叶包装设计的禅意。">
+                    Treating white as black, using white as ink. This is how calligraphers and painters understand space and structure. Therefore, the fusion of black and white may express the Zen spirit of tea packaging design.
+                </p>
+            </div>
+            
+            <!-- 容器4对应文本 -->
+            <div class="design-project-text" data-project="4">
+                <h2 class="design-project-title" 
+                    data-en="Tu'er Yeah" 
+                    data-zh="兔儿爷">
+                    Tu'er Yeah
+                </h2>
+                <p class="design-project-description" 
+                   data-en="Deconstruction and modern expression of intangible cultural heritage ip &quot;rabbit god&quot;." 
+                   data-zh="对非遗项目的解构和现代化表达。">
+                    Deconstruction and modern expression of intangible cultural heritage ip "rabbit god".
+                </p>
+            </div>
+            
+            <!-- 容器5对应文本 -->
+            <div class="design-project-text" data-project="5">
+                <h2 class="design-project-title" 
+                    data-en="Oak Tree" 
+                    data-zh="橡树">
+                    Oak Tree
+                </h2>
+                <p class="design-project-description" 
+                   data-en="Using bright colors and fluid forms to simulate the soft textures of cotton candy and clouds. &quot;Softness&quot; is the key word for the brand, permeating the color scheme and graphic design." 
+                   data-zh="用明亮的配色和流畅的形态处理模拟棉花糖和云朵的柔软质感。&quot;柔软&quot;是品牌的关键词，贯穿在配色和图形设计中。">
+                    Using bright colors and fluid forms to simulate the soft textures of cotton candy and clouds. "Softness" is the key word for the brand, permeating the color scheme and graphic design.
+                </p>
+            </div>
+            
+            <!-- 容器6对应文本 -->
+            <div class="design-project-text" data-project="6">
+                <h2 class="design-project-title" 
+                    data-en="New Wave" 
+                    data-zh="新浪潮">
+                    New Wave
+                </h2>
+                <p class="design-project-description" 
+                   data-en="Brand identity design for New Wave Studio. Just a quick aside, this is actually a question from a previous year's postgraduate entrance exam in visual communication." 
+                   data-zh="新浪潮工作室的品牌形象设计。悄悄说，这其实是某一年的视觉传达考研真题。">
+                    Brand identity design for New Wave Studio. Just a quick aside, this is actually a question from a previous year's postgraduate entrance exam in visual communication.
+                </p>
+            </div>
+            
+            <!-- 容器7对应文本 -->
+            <div class="design-project-text" data-project="7">
+                <h2 class="design-project-title" 
+                    data-en="Posters" 
+                    data-zh="海报">
+                    Posters
+                </h2>
+                <p class="design-project-description" 
+                   data-en="Some essays and exercises" 
+                   data-zh="一些随笔和练习">
+                    Some essays and exercises
+                </p>
+            </div>
+            
+            <!-- 设计项目容器 - 7个矩形容器，多图片层叠系统 -->
+            <div class="design-container" data-index="0" style="position: absolute; left: 405px; top: 1361px; width: 1065px; height: 612.66px;">
+                <div class="design-project-images">
+                    <img src="assets/design/project01_okey/okey01.png" alt="OkeyBakery Project 1" class="design-project-img" data-layer="0">
+                    <img src="assets/design/project01_okey/okey02.png" alt="OkeyBakery Project 2" class="design-project-img" data-layer="1">
+                    <img src="assets/design/project01_okey/okey03.png" alt="OkeyBakery Project 3" class="design-project-img" data-layer="2">
+                </div>
+            </div>
+            <div class="design-container" data-index="1" style="position: absolute; left: 405px; top: 2173.66px; width: 1065px; height: 612.66px;">
+                <div class="design-project-images">
+                    <img src="assets/design/project02_jiatongxing/001.png" alt="Jia Tong Xing Project 1" class="design-project-img" data-layer="0">
+                    <img src="assets/design/project02_jiatongxing/002.png" alt="Jia Tong Xing Project 2" class="design-project-img" data-layer="1">
+                    <img src="assets/design/project02_jiatongxing/003.png" alt="Jia Tong Xing Project 3" class="design-project-img" data-layer="2">
+                </div>
+            </div>
+            <div class="design-container" data-index="2" style="position: absolute; left: 405px; top: 2986.32px; width: 1065px; height: 612.66px;">
+                <div class="design-project-images">
+                    <img src="assets/design/project03_mobaicha/01.png" alt="MOBAI Tea Project 1" class="design-project-img" data-layer="0">
+                    <img src="assets/design/project03_mobaicha/02.png" alt="MOBAI Tea Project 2" class="design-project-img" data-layer="1">
+                    <img src="assets/design/project03_mobaicha/03.png" alt="MOBAI Tea Project 3" class="design-project-img" data-layer="2">
+                    <img src="assets/design/project03_mobaicha/04.png" alt="MOBAI Tea Project 4" class="design-project-img" data-layer="3">
+                </div>
+            </div>
+            <div class="design-container" data-index="3" style="position: absolute; left: 405px; top: 3798.98px; width: 1065px; height: 612.66px;">
+                <div class="design-project-images">
+                    <img src="assets/design/project04_tuerye/01.png" alt="Tu'er Yeah Project 1" class="design-project-img" data-layer="0">
+                    <img src="assets/design/project04_tuerye/02.png" alt="Tu'er Yeah Project 2" class="design-project-img" data-layer="1">
+                    <img src="assets/design/project04_tuerye/03.png" alt="Tu'er Yeah Project 3" class="design-project-img" data-layer="2">
+                </div>
+            </div>
+            <div class="design-container" data-index="4" style="position: absolute; left: 405px; top: 4611.64px; width: 1065px; height: 612.66px;">
+                <div class="design-project-images">
+                    <img src="assets/design/project05_oaktree/01.png" alt="Oak Tree Project 1" class="design-project-img" data-layer="0">
+                    <img src="assets/design/project05_oaktree/02.png" alt="Oak Tree Project 2" class="design-project-img" data-layer="1">
+                    <img src="assets/design/project05_oaktree/03.png" alt="Oak Tree Project 3" class="design-project-img" data-layer="2">
+                </div>
+            </div>
+            <div class="design-container" data-index="5" style="position: absolute; left: 405px; top: 5424.30px; width: 1065px; height: 612.66px;">
+                <div class="design-project-images">
+                    <img src="assets/design/project06_newwave/01.png" alt="New Wave Project 1" class="design-project-img" data-layer="0">
+                </div>
+            </div>
+            <div class="design-container" data-index="6" style="position: absolute; left: 405px; top: 6236.96px; width: 1065px; height: 1420px;">
+                <div class="design-project-images">
+                    <img src="assets/design/project07_posters/001.jpg" alt="Posters Project 1" class="design-project-img" data-layer="0">
+                    <img src="assets/design/project07_posters/002.jpg" alt="Posters Project 2" class="design-project-img" data-layer="1">
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- 配置文件 -->
     <script src="js/config.js"></script>
@@ -258,33 +807,43 @@
     <!-- 核心功能模块 -->
     <script src="js/language.js"></script>
     <script src="js/dropdown.js"></script>
-    <script src="js/page-manager.js"></script> <!-- 统一的页面管理系统 -->
     <script src="js/typewriter.js"></script>
     <script src="js/video.js"></script>
+    
+    <!-- 文字填充控制器 -->
+    <script src="js/text-fill.js"></script>
+    
+    <!-- 页面切换系统 -->
+    <script src="js/page-system.js"></script>
+    
+    <!-- 苹果详情页面交互 -->
+    <script src="js/apple-detail.js"></script>
+    
+    <!-- AI Coding页面交互 -->
+    <script src="js/ai-coding.js"></script>
+    
+    <!-- AI Coding详情页面交互 -->
+    <script src="js/ai-detail.js"></script>
+    
+    <!-- 平面设计页面视频轮播 -->
+    <script src="js/design-carousel.js"></script>
+    
+    <!-- 平面设计详情页面交互 -->
+    <script src="js/design-detail.js"></script>
+    
+    <!-- 摄影页面滚动动画 -->
+    <script src="js/photography.js"></script>
+    
+    <!-- 像素画生成器 -->
     <script src="js/pixel-art.js"></script>
     
-    <!-- 组件模块 -->
-    <script src="src/components/Header.js"></script>
-    <script src="src/components/VideoBackground.js"></script>
-    <script src="src/components/ScrollIndicator.js"></script>
-    <script src="src/components/GridSystem.js"></script>
-    <script src="src/components/GridKeyboardController.js"></script>
+    <!-- 像素交互动画 -->
+    <script src="js/pixel-interaction.js"></script>
     
-    <!-- 页面模块 -->
-    <script src="src/pages/HomePage.js"></script>
-    <script src="src/pages/ApplePage.js"></script>
-    <script src="src/pages/AICodingPage.js"></script>
-    <script src="src/pages/DesignPage.js"></script>
-    <script src="src/pages/PhotographyPage.js"></script>
-    <script src="src/pages/PageManager.js"></script>
+    <!-- 网格系统（合并版本） -->
+    <script src="js/grid-system.js"></script>
     
-    <!-- 路由器 -->
-    <script src="src/router.js"></script>
-    
-    <!-- 主应用 -->
-    <script src="src/app.js"></script>
-    
-    <!-- 原有主逻辑 (保持兼容) -->
+    <!-- 主逻辑 -->
     <script src="js/main.js"></script>
 </body>
 </html>

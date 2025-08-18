@@ -1,3 +1,48 @@
+/* 设计令牌 - Design Tokens */
+:root {
+    /* 基础色彩 */
+    --color-pure-black: #000000;
+    --color-dark-black: #0A0A0A;
+    --color-charcoal: #1A1A1A;
+    --color-dark-gray: #2A2A2A;
+    --color-medium-gray: #888888;
+    --color-light-gray: #B0B0B0;
+    --color-off-white: #E0E0E0;
+    --color-pure-white: #FFFFFF;
+    
+    /* 主题色 - 基于网点蓝色图案 */
+    --color-primary-blue: #0d3fe2;      /* 主要蓝色：深邃的品牌蓝 */
+    --color-secondary-blue: #4d7fff;    /* 次要蓝色：明亮的辅助蓝 */
+    --color-accent-blue: #2060ff;       /* 强调蓝色：中等深度过渡蓝 */
+    
+    /* 标准文字色 - 来自主页设计 */
+    --color-text-primary: var(--color-medium-gray);   /* 主要文字颜色 #888888 */
+    
+    --max-width: 1440px;
+    --content-width: 1280px;
+    --header-height: 40px;
+    
+    --ease-out-expo: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 字体声明 */
+@font-face {
+    font-family: 'Courier Prime';
+    src: url('../fonts/Courier_Prime/CourierPrime-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Noto Serif SC';
+    src: url('../fonts/Noto_Serif_SC/NotoSerifSC-ExtraLight.ttf') format('truetype');
+    font-weight: 200;
+    font-style: normal;
+    font-display: swap;
+}
+
 /* 基础重置 */
 * {
     margin: 0;
@@ -59,4 +104,16 @@ body.chinese .feature-description {
 
 .scroll-wrapper.locked {
     overflow: hidden;
+}
+
+/* H键功能：文本框和视觉容器边框显示 */
+body.show-text-boxes .feature-title,
+body.show-text-boxes .feature-description {
+    border: 2px solid rgba(255, 0, 0, 0.5) !important;
+    background: rgba(255, 0, 0, 0.1) !important;
+}
+
+body.show-text-boxes .feature-visual {
+    border: 2px solid rgba(0, 255, 0, 0.5) !important;
+    background: rgba(0, 255, 0, 0.05) !important;
 }
