@@ -79,7 +79,7 @@
 }
 
 .logo:hover {
-    background: #3398fe;
+    background: var(--color-primary-blue);
     color: var(--color-pure-white);
     transform: translateY(-2px);
 }

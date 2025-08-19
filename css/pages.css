@@ -131,6 +131,7 @@
     object-fit: cover;
     object-position: center;
     opacity: 0;
+    z-index: 5; /* 视频在最上层 */
     /* 移除过渡效果，直接切换 */
 }
 
@@ -169,17 +170,17 @@
     transform: translateX(-50%) translateY(-50%); /* 中心对齐 */
 }
 
-/* 平面设计页面箭头动画 - 使用页面绝对坐标 */
+/* 平面设计页面箭头动画 - 复用AI页面动画并旋转-90度 */
 .page[data-page="3"] .design-interaction-arrow {
     position: absolute;
-    left: 836px; /* 露出区域中央：(812 + 860) / 2 = 836 */
-    top: 500px; /* 交互文字下方：460 + 40 = 500 */
+    left: 24px; /* 绝对坐标836 - content-right的812 = 24px */
+    top: 296px; /* 绝对坐标336 - content-right的40 = 296px */
     width: 48px;
     height: 48px;
     overflow: hidden;
-    z-index: 2;
+    z-index: 3; /* 视频之下(z-index: 5)，蓝色背景之上(z-index: 1) */
     pointer-events: none;
-    transform: translateX(-50%) translateY(-50%); /* 中心对齐 */
+    transform: translateX(-50%) translateY(-50%) rotate(-90deg); /* 中心对齐并旋转-90度：向下箭头→向右箭头，底线→右线，垂直动画→水平动画 */
 }
 
 /* 苹果页面标题 - 填充在格子3 */
@@ -1007,9 +1008,9 @@ body.chinese .contact-title {
     overflow: visible;
 }
 
-/* 设计详情页白色打字机动画 */
+/* 设计详情页黑色打字机动画 */
 .design-typewriter {
-    color: var(--color-pure-white);
+    color: var(--color-pure-black);
     font-size: 12px;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -1021,13 +1022,13 @@ body.chinese .contact-title {
 
 .design-typewriter-text {
     display: inline-block;
-    border-right: 2px solid var(--color-pure-white);
-    animation: blink-white 1s infinite;
+    border-right: 2px solid var(--color-pure-black);
+    animation: blink-black 1s infinite;
 }
 
-/* 白色打字机专用闪烁动画 */
-@keyframes blink-white {
-    0%, 50% { border-color: var(--color-pure-white); }
+/* 黑色打字机专用闪烁动画 */
+@keyframes blink-black {
+    0%, 50% { border-color: var(--color-pure-black); }
     51%, 100% { border-color: transparent; }
 }
 
