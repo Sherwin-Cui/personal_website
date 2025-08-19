@@ -6,6 +6,11 @@ window.DesignDetail = (function() {
     let isDetailPageVisible = false;
     let typewriterTimeout;
     
+    // 打字机状态变量 - 移到全局作用域
+    let currentText = '';
+    let isDeleting = false;
+    let charIndex = 0;
+    
     // 初始化
     function init() {
         console.log('[DesignDetail] 初始化平面设计详情页面交互');
@@ -95,14 +100,15 @@ window.DesignDetail = (function() {
             clearTimeout(typewriterTimeout);
         }
         
+        // 重置打字机状态
+        currentText = '';
+        isDeleting = false;
+        charIndex = 0;
+        
         const texts = {
             en: 'scroll to explore',
             zh: '滑动以探索'
         };
-        
-        let currentText = '';
-        let isDeleting = false;
-        let charIndex = 0;
         
         function typeWriter() {
             const currentLanguage = window.LanguageManager ? window.LanguageManager.getCurrentLanguage() : 'en';
@@ -155,6 +161,12 @@ window.DesignDetail = (function() {
             clearTimeout(typewriterTimeout);
             typewriterTimeout = null;
         }
+        
+        // 重置所有状态
+        currentText = '';
+        isDeleting = false;
+        charIndex = 0;
+        
         if (designTypewriter) {
             designTypewriter.textContent = '';
         }

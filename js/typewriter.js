@@ -2,6 +2,11 @@
 window.TypewriterManager = (function() {
     let typewriterTimeout;
     
+    // 打字机状态变量 - 移到全局作用域
+    let currentText = '';
+    let isDeleting = false;
+    let charIndex = 0;
+    
     function init() {
         const typewriterElement = document.querySelector('.typewriter-text');
         if (!typewriterElement) return;
@@ -11,11 +16,12 @@ window.TypewriterManager = (function() {
             clearTimeout(typewriterTimeout);
         }
         
-        const texts = AppConfig.text.scrollIndicator;
+        // 重置打字机状态
+        currentText = '';
+        isDeleting = false;
+        charIndex = 0;
         
-        let currentText = '';
-        let isDeleting = false;
-        let charIndex = 0;
+        const texts = AppConfig.text.scrollIndicator;
         
         function typeWriter() {
             const currentLanguage = window.LanguageManager ? window.LanguageManager.getCurrentLanguage() : 'en';
